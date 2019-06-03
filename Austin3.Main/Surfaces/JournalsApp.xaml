@@ -1,0 +1,146 @@
+﻿<UserControl x:Class="ZU.Apps.Austin3.Surfaces.JournalsApp"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:zuwc="clr-namespace:System.Windows.Controls;assembly=ZU.Shared.Wpf"
+             xmlns:local="clr-namespace:ZU.Apps.Austin3.Surfaces"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate x:Key="JournalDataItem">
+            <Viewbox Width="{Binding Width}">
+                <Grid >
+                    <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="Layer_2" Width="395" Height="510" Canvas.Left="0" Canvas.Top="0">
+                        <Path Width="360" Height="480" Canvas.Left="17" Canvas.Top="10" Stretch="Fill" StrokeLineJoin="Round" Stroke="LightGray" Fill="{Binding FrontCoverBrush}" Data="F1 M 18.1458,11.2083L 359.813,11.125L 364.771,12.5L 367.687,13.7084L 369.521,14.5834L 371.646,16.375L 373.354,18.3334L 375.021,20.7084L 376.354,23.4584L 377.187,26.8334L 377.687,30.2084L 377.646,473.292L 376.937,477.542L 375.437,481.083C 375.437,481.083 373.354,484.5 373.187,484.5C 373.021,484.5 370.271,487.083 370.271,487.083L 366.687,489.458L 362.646,490.708L 358.187,490.875L 18.2292,490.958L 18.1875,11"/>
+                    </Canvas>
+                    <TextBlock Text="{Binding DisplayName}" Foreground="White" FontSize="40" FontFamily="Segoe UI Light" Margin="50,0,50,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                </Grid>
+            </Viewbox>
+        </DataTemplate>
+
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="AddNewJournalButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Viewbox Width="{Binding Width}" >
+                            <Grid x:Name="buttonLayoutRoot">
+                                <Grid.Effect>
+                                    <DropShadowEffect Color="Orange" BlurRadius="50" ShadowDepth="0" Direction="0"/>
+                                </Grid.Effect>
+                                <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="Layer_2" Width="395" Height="510" Canvas.Left="0" Canvas.Top="0">
+                                    <Path Width="360" Height="480" Canvas.Left="17" Canvas.Top="10" Stretch="Fill" StrokeLineJoin="Round" Stroke="LightGray" Fill="White" Data="F1 M 18.1458,11.2083L 359.813,11.125L 364.771,12.5L 367.687,13.7084L 369.521,14.5834L 371.646,16.375L 373.354,18.3334L 375.021,20.7084L 376.354,23.4584L 377.187,26.8334L 377.687,30.2084L 377.646,473.292L 376.937,477.542L 375.437,481.083C 375.437,481.083 373.354,484.5 373.187,484.5C 373.021,484.5 370.271,487.083 370.271,487.083L 366.687,489.458L 362.646,490.708L 358.187,490.875L 18.2292,490.958L 18.1875,11"/>
+                                </Canvas>
+                                <TextBlock Text="+" Foreground="Orange" FontSize="300" FontFamily="Segoe UI Medium" Margin="50,-60,50,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Viewbox>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="false">
+                                <Setter TargetName="buttonLayoutRoot" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Orange" BlurRadius="10" ShadowDepth="0" Direction="0"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="buttonLayoutRoot" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Orange" BlurRadius="50" ShadowDepth="0" Direction="0"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="buttonLayoutRoot" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Orange" BlurRadius="50" ShadowDepth="0" Direction="0"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </UserControl.Resources>
+    
+    <Grid>
+        <ListBox x:Name="journalsListBox" 
+                     ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback"
+                     ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                     ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                     ItemTemplate="{DynamicResource JournalDataItem}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <zuwc:ZoomableCanvas x:Name="zoomableCanvas"
+                                     HorizontalAlignment="Stretch"
+								     VerticalAlignment="Stretch"
+									 ApplyTransform="True"
+                                     />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="Canvas.Left"
+                            Value="{Binding X}"/>
+                    <Setter Property="Canvas.Top"
+                            Value="{Binding Y}"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <ContentPresenter x:Name="contentPresenter" />
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="true">
+                                        <Setter TargetName="contentPresenter" Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect Color="{Binding FrontCoverColor}" BlurRadius="50" ShadowDepth="0" Direction="100" RenderingBias="Quality"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="false">
+                                        <Setter TargetName="contentPresenter" Property="Effect" Value="{x:Null}"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+
+            <ListBox.Items>
+            </ListBox.Items>
+        </ListBox>
+
+        <Button x:Name="addNewJournalButton" Width="50" Height="Auto" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20" Style="{DynamicResource AddNewJournalButtonStyle}">
+            <Viewbox Width="{Binding Width}" >
+                <Grid >
+                    <Grid.Effect>
+                        <DropShadowEffect Color="Orange" BlurRadius="50" ShadowDepth="0" Direction="0"/>
+                    </Grid.Effect>
+                    <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="Layer_2" Width="395" Height="510" Canvas.Left="0" Canvas.Top="0">
+                        <Path Width="360" Height="480" Canvas.Left="17" Canvas.Top="10" Stretch="Fill" StrokeLineJoin="Round" Stroke="LightGray" Fill="White" Data="F1 M 18.1458,11.2083L 359.813,11.125L 364.771,12.5L 367.687,13.7084L 369.521,14.5834L 371.646,16.375L 373.354,18.3334L 375.021,20.7084L 376.354,23.4584L 377.187,26.8334L 377.687,30.2084L 377.646,473.292L 376.937,477.542L 375.437,481.083C 375.437,481.083 373.354,484.5 373.187,484.5C 373.021,484.5 370.271,487.083 370.271,487.083L 366.687,489.458L 362.646,490.708L 358.187,490.875L 18.2292,490.958L 18.1875,11"/>
+                    </Canvas>
+                    <TextBlock Text="+" Foreground="Orange" FontSize="300" FontFamily="Segoe UI Medium" Margin="50,-60,50,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </Viewbox>
+        </Button>
+    </Grid>
+</UserControl>

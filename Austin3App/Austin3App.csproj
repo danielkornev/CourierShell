@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{20A943EC-4BF8-4A5D-A626-F5733CFEEEEE}</ProjectGuid>
+    <ProjectGuid>{145707DC-A1F3-4DE6-B0F2-2B5E24C05155}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>MobileShell</RootNamespace>
-    <AssemblyName>MobileShell</AssemblyName>
+    <RootNamespace>ZU.Apps.Austin3</RootNamespace>
+    <AssemblyName>Austin3App</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -35,28 +35,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
+    <ApplicationIcon>Book-01.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime.WindowsRuntime, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETCore\v4.5\System.Runtime.WindowsRuntime.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="Windows">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.16299.0\Windows.winmd</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -67,51 +64,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Classes\AcrylicBlur.cs" />
-    <Compile Include="Classes\AppBar.cs" />
-    <Compile Include="Classes\HookEngine.cs" />
-    <Compile Include="Classes\WnfQueries.cs" />
-    <Compile Include="Classes\WPFHelper.cs" />
-    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
-    <Compile Include="Converters\DualSimStatusNumberToUnicodeConverter.cs" />
-    <Compile Include="Converters\PhoneNetworkStateRoamingToUnicodeConverter.cs" />
-    <Compile Include="Enums\ConnectionType.cs" />
-    <Compile Include="Controls\CellularIcon.xaml.cs">
-      <DependentUpon>CellularIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Converters\PhoneSimToVisibilityConverter.cs" />
-    <Compile Include="Converters\SignalStrengthToUnicodeConverter.cs" />
-    <Compile Include="Enums\SignalStrength.cs" />
-    <Compile Include="StatusBarWindow.cs">
-      <DependentUpon>StatusBarWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TaskbarWindow.xaml.cs">
-      <DependentUpon>TaskbarWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VolumeAudioFlyout.xaml.cs">
-      <DependentUpon>VolumeAudioFlyout.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Controls\CellularIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="StatusBarWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Classes\NativeMethods.cs" />
-    <Page Include="TaskbarWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VolumeAudioFlyout.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -132,8 +88,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.manifest" />
-    <Resource Include="Fonts\HOLOMDL2.TTF" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -142,9 +96,22 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Austin3.Main\Austin3.Main.csproj">
+      <Project>{7c783c75-2832-46e3-be5a-3086059f88da}</Project>
+      <Name>Austin3.Main</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZU.Shared.Wpf\ZU.Shared.Wpf.csproj">
+      <Project>{89955544-91a1-472d-a337-56142620e864}</Project>
+      <Name>ZU.Shared.Wpf</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Book-01.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>REM copy /Y $(TargetPath) C:\NETWORK_SHARE\$(TargetFileName)</PostBuildEvent>
+    <PostBuildEvent>xcopy *.* /e /y /c \\desktop-20mv84m\Users\danie\Downloads\austin3\bin\
+</PostBuildEvent>
   </PropertyGroup>
 </Project>
