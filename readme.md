@@ -3,7 +3,7 @@
 ### Pure MobileShell running on a PC:
 ![pcMobileShell](demo/PC.png "MobileShell running on a PC")
 
-### Running on a phone:
+### Running on a Tablet (Surface Go):
 ![tabletCourierShell](demo/CourierShellDemo_1_Journal_Camera.jpg "Courier-like app and MobileShell running on a Tablet")
 
 ## What's new:
