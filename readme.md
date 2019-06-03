@@ -1,8 +1,5 @@
 # CourierShell - A custom shell for Windows 10 Desktop on Tablets (18632+)
 
-### Pure MobileShell running on a PC:
-![pcMobileShell](demo/PC.png "MobileShell running on a PC")
-
 ### Running on a Tablet (Surface Go):
 ![tabletCourierShell](demo/CourierShellDemo_1_Journal_Camera.jpg "Courier-like app and MobileShell running on a Tablet")
 
