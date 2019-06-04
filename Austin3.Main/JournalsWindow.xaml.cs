@@ -30,6 +30,7 @@ namespace ZU.Apps.Austin3
         CameraPage cameraPageRightInstance;
 
         JournalPage journalPageLeftInstance;
+        JournalPage journalPageRightInstance;
 
         public JournalsWindow()
         {
@@ -102,6 +103,16 @@ namespace ZU.Apps.Austin3
                 if (journalPageLeftInstance == null)
                     this.journalPageLeftInstance = new JournalPage();
                 return this.journalPageLeftInstance;
+            }
+        }
+
+        public JournalPage JournalPageRightInstance
+        {
+            get
+            {
+                if (journalPageRightInstance == null)
+                    this.journalPageRightInstance = new JournalPage();
+                return this.journalPageRightInstance;
             }
         }
 
@@ -191,6 +202,14 @@ namespace ZU.Apps.Austin3
 
             leftAppContentPresenter.Visibility = Visibility.Visible;
             leftAppContentPresenter.Content = this.JournalPageLeftInstance;
+        }
+
+        private void JournalPageClicked_RightSide(object sender, MouseButtonEventArgs e)
+        {
+            HideAppsScroller();
+
+            rightAppContentPresenter.Visibility = Visibility.Visible;
+            rightAppContentPresenter.Content = this.JournalPageRightInstance;
         }
     } // class
 } // namespace

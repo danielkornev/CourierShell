@@ -140,5 +140,31 @@
   <ItemGroup>
     <Resource Include="Resources\stl_grayscale_browse_th_10.scale-100.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\stl_art_cover_bg_02.scale-100.jpg" />
+    <Resource Include="Resources\stl_art_cover_bg_04.scale-100.jpg" />
+    <Resource Include="Resources\stl_art_cover_bg_05.scale-100.jpg" />
+    <Resource Include="Resources\stl_art_cover_bg_06.scale-100.jpg" />
+    <Resource Include="Resources\stl_art_cover_bg_07.scale-100.jpg" />
+    <Resource Include="Resources\stl_basic_cover_bg_01.scale-100.jpg" />
+    <Resource Include="Resources\stl_basic_cover_bg_02.scale-100.jpg" />
+    <Resource Include="Resources\stl_basic_cover_bg_03.scale-100.jpg" />
+    <Resource Include="Resources\stl_basic_cover_bg_04.scale-100.jpg" />
+    <Resource Include="Resources\stl_basic_cover_bg_05.scale-100.jpg" />
+    <Resource Include="Resources\stl_basic_cover_bg_06.scale-100.jpg" />
+    <Resource Include="Resources\stl_basic_cover_bg_07.scale-100.jpg" />
+    <Resource Include="Resources\stl_basic_cover_bg_08.scale-100.jpg" />
+    <Resource Include="Resources\stl_christmas_cover_bg_01.scale-100.jpg" />
+    <Resource Include="Resources\stl_christmas_cover_bg_02.scale-100.jpg" />
+    <Resource Include="Resources\stl_christmas_cover_bg_03.scale-100.jpg" />
+    <Resource Include="Resources\stl_classic_cover_bg_02.scale-100.jpg" />
+    <Resource Include="Resources\stl_classic_cover_bg_03.scale-100.jpg" />
+    <Resource Include="Resources\stl_classic_cover_bg_04.scale-100.jpg" />
+    <Resource Include="Resources\stl_classic_cover_bg_05.scale-100.jpg" />
+    <Resource Include="Resources\stl_grayscale_cover_bg_01.scale-100.jpg" />
+    <Resource Include="Resources\stl_grayscale_cover_bg_02.scale-100.jpg" />
+    <Resource Include="Resources\stl_grayscale_cover_bg_03.scale-100.jpg" />
+    <Resource Include="Resources\stl_grayscale_cover_bg_04.scale-100.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
