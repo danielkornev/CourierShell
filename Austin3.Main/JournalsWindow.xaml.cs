@@ -90,7 +90,7 @@ namespace ZU.Apps.Austin3
             get
             {
                 if (journalPageLeftInstance == null)
-                    this.journalPageLeftInstance = new JournalPage(Constants.Side.Left);
+                    this.journalPageLeftInstance = new JournalPage(Constants.Side.Left, 1);
                 return this.journalPageLeftInstance;
             }
         }
@@ -100,7 +100,7 @@ namespace ZU.Apps.Austin3
             get
             {
                 if (journalPageRightInstance == null)
-                    this.journalPageRightInstance = new JournalPage(Constants.Side.Right);
+                    this.journalPageRightInstance = new JournalPage(Constants.Side.Right, 1);
                 return this.journalPageRightInstance;
             }
         }
@@ -132,11 +132,17 @@ namespace ZU.Apps.Austin3
 
         private void HideAppsScroller()
         {
-            this.leftAppsListBox.Visibility = Visibility.Collapsed;
-            leftAppContentPresenter.Visibility = Visibility.Visible;
+            if (this.leftAppContentPresenter.Tag != null)
+            {
+                this.leftAppsListBox.Visibility = Visibility.Collapsed;
+                leftAppContentPresenter.Visibility = Visibility.Visible;
+            }
 
-            this.rightAppsListBox.Visibility = Visibility.Collapsed;
-            rightAppContentPresenter.Visibility = Visibility.Visible;
+            if (this.rightAppContentPresenter.Tag != null)
+            {
+                this.rightAppsListBox.Visibility = Visibility.Collapsed;
+                rightAppContentPresenter.Visibility = Visibility.Visible;
+            }
 
             areAppsShown = false;
 
@@ -149,6 +155,8 @@ namespace ZU.Apps.Austin3
 
         private void JournalAppClicked_LeftSide(object sender, MouseButtonEventArgs e)
         {
+            this.leftAppContentPresenter.Tag = "set";
+
             HideAppsScroller();
 
             leftAppContentPresenter.Visibility = Visibility.Visible;
@@ -158,6 +166,8 @@ namespace ZU.Apps.Austin3
 
         private void JournalAppClicked_RightSide(object sender, MouseButtonEventArgs e)
         {
+            this.rightAppContentPresenter.Tag = "set";
+
             HideAppsScroller();
 
             rightAppContentPresenter.Visibility = Visibility.Visible;
@@ -168,6 +178,8 @@ namespace ZU.Apps.Austin3
 
         private void CameraAppClicked_LeftSide(object sender, MouseButtonEventArgs e)
         {
+            this.leftAppContentPresenter.Tag = "set";
+
             HideAppsScroller();
 
             leftAppContentPresenter.Visibility = Visibility.Visible;
@@ -181,6 +193,8 @@ namespace ZU.Apps.Austin3
 
         private void CameraAppClicked_RightSide(object sender, MouseButtonEventArgs e)
         {
+            this.rightAppContentPresenter.Tag = "set";
+
             HideAppsScroller();
 
             rightAppContentPresenter.Visibility = Visibility.Visible;
@@ -193,18 +207,32 @@ namespace ZU.Apps.Austin3
 
         private void JournalPageClicked_LeftSide(object sender, MouseButtonEventArgs e)
         {
+            this.leftAppContentPresenter.Tag = "set";
+
             HideAppsScroller();
 
             leftAppContentPresenter.Visibility = Visibility.Visible;
             leftAppContentPresenter.Content = this.JournalPageLeftInstance;
+
+            if (rightAppContentPresenter.Content == this.journalPageRightInstance)
+            {
+                this.JournalPageRightInstance.PageNumber = 2;
+            }
         }
 
         private void JournalPageClicked_RightSide(object sender, MouseButtonEventArgs e)
         {
+            this.rightAppContentPresenter.Tag = "set";
+
             HideAppsScroller();
 
             rightAppContentPresenter.Visibility = Visibility.Visible;
             rightAppContentPresenter.Content = this.JournalPageRightInstance;
+
+            if (leftAppContentPresenter.Content == this.journalPageLeftInstance)
+            {
+                this.JournalPageRightInstance.PageNumber = 2;
+            }
         }
     } // class
 } // namespace

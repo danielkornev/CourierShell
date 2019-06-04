@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ZU.Apps.Austin3.Surfaces.Journal"
+             x:Name="journalPage"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -16,8 +17,11 @@
         <InkCanvas x:Name="inkCanvas" 
                    Stylus.IsTouchFeedbackEnabled="False"
                    Stylus.IsPressAndHoldEnabled="False" Background="Transparent" PreviewStylusDown="InkCanvas_PreviewStylusDown" PreviewStylusMove="InkCanvas_PreviewStylusMove" PreviewTouchDown="InkCanvas_PreviewTouchDown" PreviewTouchMove="InkCanvas_PreviewTouchMove" />
-        
-        
-        
+
+        <Grid Background="#FF000000" x:Name="pageNumberAndOptionsGrid" Margin="0,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+              Width="100" Height="50">
+            <TextBlock Text="{Binding ElementName=journalPage, Path=PageNumber}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="White"></TextBlock>
+        </Grid>
+
     </Grid>
 </UserControl>
