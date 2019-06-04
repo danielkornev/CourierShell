@@ -21,10 +21,26 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
     /// </summary>
     public partial class JournalPage : UserControl
     {
+
+
+        public Constants.Side PageSide
+        {
+            get { return (Constants.Side)GetValue(PageSideProperty); }
+            set { SetValue(PageSideProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for PageSide.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PageSideProperty =
+            DependencyProperty.Register("PageSide", typeof(Constants.Side), typeof(JournalPage), new PropertyMetadata(Constants.Side.Unknown));
+
+
+
         private InkAnalyzer newAnalyzer;
 
-        public JournalPage()
+        public JournalPage(Constants.Side side)
         {
+            this.PageSide = side;
+
             InitializeComponent();
 
             this.Loaded += JournalPage_Loaded;
@@ -57,6 +73,33 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
         private void JournalPage_Loaded(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void InkCanvas_TouchDown(object sender, TouchEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void InkCanvas_PreviewTouchDown(object sender, TouchEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void InkCanvas_PreviewTouchMove(object sender, TouchEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void InkCanvas_PreviewStylusDown(object sender, StylusDownEventArgs e)
+        {
+            if (e.StylusDevice.TabletDevice.Type == TabletDeviceType.Touch)
+                e.Handled = true;
+        }
+
+        private void InkCanvas_PreviewStylusMove(object sender, StylusEventArgs e)
+        {
+            if (e.StylusDevice.TabletDevice.Type == TabletDeviceType.Touch)
+                e.Handled = true;
         }
     } // class
 } // namespace

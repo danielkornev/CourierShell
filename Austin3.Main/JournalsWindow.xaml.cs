@@ -26,8 +26,7 @@ namespace ZU.Apps.Austin3
         JournalsApp journalsAppRightInstance;
         JournalsApp journalsAppLeftInstance;
 
-        CameraPage cameraPageLeftInstance;
-        CameraPage cameraPageRightInstance;
+        CameraPage cameraPageInstance;
 
         JournalPage journalPageLeftInstance;
         JournalPage journalPageRightInstance;
@@ -55,23 +54,13 @@ namespace ZU.Apps.Austin3
 
         
 
-        public CameraPage CameraAppRightInstance
+        public CameraPage CameraAppInstance
         {
             get
             {
-                if (cameraPageRightInstance == null)
-                    this.cameraPageRightInstance = new CameraPage();
-                return this.cameraPageRightInstance;
-            }
-        }
-
-        public CameraPage CameraAppLeftInstance
-        {
-            get
-            {
-                if (cameraPageLeftInstance == null)
-                    this.cameraPageLeftInstance = new CameraPage();
-                return this.cameraPageLeftInstance;
+                if (cameraPageInstance == null)
+                    this.cameraPageInstance = new CameraPage();
+                return this.cameraPageInstance;
             }
         }
 
@@ -101,7 +90,7 @@ namespace ZU.Apps.Austin3
             get
             {
                 if (journalPageLeftInstance == null)
-                    this.journalPageLeftInstance = new JournalPage();
+                    this.journalPageLeftInstance = new JournalPage(Constants.Side.Left);
                 return this.journalPageLeftInstance;
             }
         }
@@ -111,7 +100,7 @@ namespace ZU.Apps.Austin3
             get
             {
                 if (journalPageRightInstance == null)
-                    this.journalPageRightInstance = new JournalPage();
+                    this.journalPageRightInstance = new JournalPage(Constants.Side.Right);
                 return this.journalPageRightInstance;
             }
         }
@@ -183,7 +172,10 @@ namespace ZU.Apps.Austin3
 
             leftAppContentPresenter.Visibility = Visibility.Visible;
 
-            leftAppContentPresenter.Content = this.CameraAppLeftInstance;
+            if (rightAppContentPresenter.Content == this.CameraAppInstance)
+                rightAppContentPresenter.Content = null;
+
+            leftAppContentPresenter.Content = this.CameraAppInstance;
         }
         
 
@@ -193,7 +185,10 @@ namespace ZU.Apps.Austin3
 
             rightAppContentPresenter.Visibility = Visibility.Visible;
 
-            rightAppContentPresenter.Content = this.CameraAppRightInstance;
+            if (leftAppContentPresenter.Content == this.CameraAppInstance)
+                leftAppContentPresenter.Content = null;
+
+            rightAppContentPresenter.Content = this.CameraAppInstance;
         }
 
         private void JournalPageClicked_LeftSide(object sender, MouseButtonEventArgs e)

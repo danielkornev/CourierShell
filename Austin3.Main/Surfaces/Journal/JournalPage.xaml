@@ -8,9 +8,16 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Austin3.Main;component/Resources/stl_grayscale_browse_th_10.scale-100.jpg" TileMode="Tile" Stretch="None" ViewportUnits="Absolute" Viewport="0,0,200,200" />
+            <ImageBrush ImageSource="/Austin3.Main;component/Resources/Papers/stl_basic_paper_bg_07.jpg" TileMode="Tile" Stretch="None" ViewportUnits="Absolute" Viewport="0,0,50,50" />
         </Grid.Background>
 
-        <InkCanvas x:Name="inkCanvas" Background="Transparent"/>
+        <Canvas x:Name="shapesCanvas" Background="Transparent"/>
+
+        <InkCanvas x:Name="inkCanvas" 
+                   Stylus.IsTouchFeedbackEnabled="False"
+                   Stylus.IsPressAndHoldEnabled="False" Background="Transparent" PreviewStylusDown="InkCanvas_PreviewStylusDown" PreviewStylusMove="InkCanvas_PreviewStylusMove" PreviewTouchDown="InkCanvas_PreviewTouchDown" PreviewTouchMove="InkCanvas_PreviewTouchMove" />
+        
+        
+        
     </Grid>
 </UserControl>

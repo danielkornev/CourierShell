@@ -19,5 +19,12 @@ namespace ZU.Apps.Austin3
             public static string BeautifulGreen = "#FF1DA07E";
             public static string MidGray = "#FF646464";
         }
+
+        public enum Side
+        {
+            Left,
+            Right,
+            Unknown
+        }
     } // class
 } // namespace

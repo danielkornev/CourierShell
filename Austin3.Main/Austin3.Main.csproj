@@ -147,7 +147,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\stl_grayscale_browse_th_10.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_grayscale_browse_th_10.scale-100.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\stl_art_cover_bg_02.scale-100.jpg" />
@@ -174,6 +174,71 @@
     <Resource Include="Resources\stl_grayscale_cover_bg_02.scale-100.jpg" />
     <Resource Include="Resources\stl_grayscale_cover_bg_03.scale-100.jpg" />
     <Resource Include="Resources\stl_grayscale_cover_bg_04.scale-100.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Papers\stl_art_browse_th_01.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_art_browse_th_02.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_art_browse_th_03.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_art_browse_th_04.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_art_browse_th_06.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_art_paper_bg_01.jpg" />
+    <Resource Include="Resources\Papers\stl_art_paper_bg_02.jpg" />
+    <Resource Include="Resources\Papers\stl_art_paper_bg_03.jpg" />
+    <Resource Include="Resources\Papers\stl_art_paper_bg_04.jpg" />
+    <Resource Include="Resources\Papers\stl_art_paper_bg_05.jpg" />
+    <Resource Include="Resources\Papers\stl_art_paper_bg_06.jpg" />
+    <Resource Include="Resources\Papers\stl_art_paper_open_book_01.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_art_paper_open_book_02.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_art_paper_open_book_03.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_art_paper_open_book_04.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_art_paper_open_book_06.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_basic_browse_th_01.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_basic_browse_th_02.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_basic_browse_th_03.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_basic_browse_th_04.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_basic_browse_th_07.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_basic_paper_bg_01.jpg" />
+    <Resource Include="Resources\Papers\stl_basic_paper_bg_02.jpg" />
+    <Resource Include="Resources\Papers\stl_basic_paper_bg_03.jpg" />
+    <Resource Include="Resources\Papers\stl_basic_paper_bg_04.jpg" />
+    <Resource Include="Resources\Papers\stl_basic_paper_bg_07.jpg" />
+    <Resource Include="Resources\Papers\stl_basic_paper_open_book_01.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_basic_paper_open_book_02.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_basic_paper_open_book_03.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_basic_paper_open_book_04.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_basic_paper_open_book_07.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_classic_browse_th_01.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_classic_browse_th_02.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_classic_browse_th_04.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_classic_browse_th_05.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_classic_browse_th_06.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_classic_browse_th_09.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_classic_paper_bg_01.jpg" />
+    <Resource Include="Resources\Papers\stl_classic_paper_bg_02.jpg" />
+    <Resource Include="Resources\Papers\stl_classic_paper_bg_04.jpg" />
+    <Resource Include="Resources\Papers\stl_classic_paper_bg_05.jpg" />
+    <Resource Include="Resources\Papers\stl_classic_paper_bg_06.jpg" />
+    <Resource Include="Resources\Papers\stl_classic_paper_bg_09.jpg" />
+    <Resource Include="Resources\Papers\stl_classic_paper_open_book_01.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_classic_paper_open_book_02.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_classic_paper_open_book_04.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_classic_paper_open_book_05.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_classic_paper_open_book_06.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_classic_paper_open_book_09.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_grayscale_browse_th_01.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_grayscale_browse_th_04.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_grayscale_browse_th_05.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_grayscale_browse_th_06.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_grayscale_paper_bg_01.jpg" />
+    <Resource Include="Resources\Papers\stl_grayscale_paper_bg_04.jpg" />
+    <Resource Include="Resources\Papers\stl_grayscale_paper_bg_05.jpg" />
+    <Resource Include="Resources\Papers\stl_grayscale_paper_bg_06.jpg" />
+    <Resource Include="Resources\Papers\stl_grayscale_paper_bg_10.jpg" />
+    <Resource Include="Resources\Papers\stl_grayscale_paper_open_book_01.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_grayscale_paper_open_book_04.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_grayscale_paper_open_book_05.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_grayscale_paper_open_book_06.scale-100.jpg" />
+    <Resource Include="Resources\Papers\stl_grayscale_paper_open_book_10.scale-100.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -64,10 +64,10 @@
 
 
 
-        <hosting:WindowsXamlHost Grid.Row="0" x:Name="cameraCapturePreview" InitialTypeName="Windows.UI.Xaml.Controls.CaptureElement" ChildChanged="CameraCapturePreview_ChildChanged">
+        <hosting:WindowsXamlHost Grid.Row="0" Margin="-1" x:Name="cameraCapturePreview" InitialTypeName="Windows.UI.Xaml.Controls.CaptureElement" ChildChanged="CameraCapturePreview_ChildChanged">
 
         </hosting:WindowsXamlHost>
-        <StackPanel Grid.Row="1" Orientation="Vertical" >
+        <StackPanel Grid.Row="1" Margin="-1" Orientation="Vertical" >
 
             <Button x:Name="someButton" Width="40" Height="40" HorizontalAlignment="Center" Margin="0,10,0,10" Click="SomeButton_Click" Style="{DynamicResource TakePhotoButtonTemplate}">
                 <Path Data="M16,9.8209991C13.243,9.8209991 11,12.063999 11,14.820999 11,17.577999 13.243,19.820999 16,19.820999 18.757,19.820999 21,17.577999 21,14.820999 21,12.063999 18.757,9.8209991 16,9.8209991z M16,7.8209996C19.858999,7.8209996 23,10.960999 23,14.820999 23,18.681 19.858999,21.820999 16,21.820999 12.141,21.820999 9,18.681 9,14.820999 9,10.960999 12.141,7.8209996 16,7.8209996z M9.677002,2L7.9290161,6.3720016C7.776001,6.7509995,7.4089966,7,7,7L3,7C2.447998,7,2,7.4490013,2,8L2,24C2,24.550999,2.447998,25,3,25L29,25C29.552002,25,30,24.550999,30,24L30,8C30,7.4490013,29.552002,7,29,7L25,7C24.591003,7,24.223999,6.7509995,24.070984,6.3720016L22.322998,2z M9,0L23,0C23.408997,0,23.776001,0.24900055,23.929016,0.62799835L25.677002,5 29,5C30.653992,5,32,6.3460007,32,8L32,24C32,25.653999,30.653992,27,29,27L3,27C1.3460083,27,0,25.653999,0,24L0,8C0,6.3460007,1.3460083,5,3,5L6.322998,5 8.0709839,0.62799835C8.223999,0.24900055,8.5910034,0,9,0z" Stretch="Uniform" Fill="White" Width="30" Height="30" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
