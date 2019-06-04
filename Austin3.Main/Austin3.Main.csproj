@@ -32,6 +32,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="IACore">
+      <HintPath>..\..\system.windows.ink\IACore.dll</HintPath>
+    </Reference>
+    <Reference Include="IALoader">
+      <HintPath>..\..\system.windows.ink\IALoader.dll</HintPath>
+    </Reference>
+    <Reference Include="IAWinFX">
+      <HintPath>..\..\system.windows.ink\IAWinFX.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
