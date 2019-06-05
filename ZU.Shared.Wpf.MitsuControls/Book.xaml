@@ -16,11 +16,15 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50*" />
+                    <ColumnDefinition Width="1"/>
                     <ColumnDefinition Width="50*" />
                 </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="1" Background="DarkGray"/>
+
                 <local:BookPage Grid.Column="0" Name="sheet0" IsTopRightCornerEnabled="false" IsBottomRightCornerEnabled="false"
                                 MouseDown="OnLeftMouseDown" PageTurned="OnLeftPageTurned" />
-                <local:BookPage Grid.Column="1" Name="sheet1" IsTopLeftCornerEnabled="false" IsBottomLeftCornerEnabled="false"
+                <local:BookPage Grid.Column="2" Name="sheet1" IsTopLeftCornerEnabled="false" IsBottomLeftCornerEnabled="false"
                                 MouseDown="OnRightMouseDown" PageTurned="OnRightPageTurned" />
             </Grid>
         </ControlTemplate>
