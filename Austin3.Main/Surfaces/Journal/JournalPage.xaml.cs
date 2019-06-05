@@ -80,16 +80,19 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
 
         private InkAnalyzer newAnalyzer;
 
-        public JournalPage(Constants.Side side, int pageNumber)
+        public JournalPage()
         {
-            this.PageSide = side;
-            this.PageNumber = pageNumber;
-
             InitializeComponent();
 
             this.Loaded += JournalPage_Loaded;
 
             this.inkCanvas.Loaded += InkCanvas_Loaded;
+        }
+
+        public JournalPage(Constants.Side side, int pageNumber) : this()
+        {
+            this.PageSide = side;
+            this.PageNumber = pageNumber;
         }
 
         private void InkCanvas_Loaded(object sender, RoutedEventArgs e)
@@ -107,8 +110,17 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
 
         private void InkCanvas_StrokeCollected(object sender, InkCanvasStrokeCollectedEventArgs e)
         {
-            newAnalyzer.AddStroke(e.Stroke);
-            newAnalyzer.BackgroundAnalyze();
+            try
+            {
+                newAnalyzer.AddStroke(e.Stroke);
+                newAnalyzer.BackgroundAnalyze();
+            }
+            catch
+            {
+                // we get to Exception "At least one stroke in the collection is already referenced by the InkAnalyzer" somehow. No idea why.
+
+
+            }
         }
 
         private void newAnalyzer_ResultsUpdated(object sender, ResultsUpdatedEventArgs e)

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ZU.Apps.Austin3.Surfaces.Journal"
              x:Name="journalPage"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             MinHeight="728" MinWidth="560">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Austin3.Main;component/Resources/Papers/stl_basic_paper_bg_07.jpg" TileMode="Tile" Stretch="None" ViewportUnits="Absolute" Viewport="0,0,50,50" />
@@ -18,7 +18,7 @@
                    Stylus.IsTouchFeedbackEnabled="False"
                    Stylus.IsPressAndHoldEnabled="False" Background="Transparent" PreviewStylusDown="InkCanvas_PreviewStylusDown" PreviewStylusMove="InkCanvas_PreviewStylusMove" PreviewTouchDown="InkCanvas_PreviewTouchDown" PreviewTouchMove="InkCanvas_PreviewTouchMove" />
 
-        <Grid Background="#FF000000" x:Name="pageNumberAndOptionsGrid" Margin="0,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+        <Grid Visibility="Collapsed" Background="#FF000000" x:Name="pageNumberAndOptionsGrid" Margin="0,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
               Width="100" Height="50">
             <TextBlock Text="{Binding ElementName=journalPage, Path=PageNumber}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="White"></TextBlock>
         </Grid>

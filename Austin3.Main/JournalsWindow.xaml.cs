@@ -144,17 +144,17 @@ namespace ZU.Apps.Austin3
 
         private void HideAppsScroller()
         {
-            if (this.leftAppContentPresenter.Tag != null)
-            {
+            //if (this.leftAppContentPresenter.Tag != null)
+            //{
                 this.leftAppsListBox.Visibility = Visibility.Collapsed;
                 leftAppContentPresenter.Visibility = Visibility.Visible;
-            }
+            //}
 
-            if (this.rightAppContentPresenter.Tag != null)
-            {
+            //if (this.rightAppContentPresenter.Tag != null)
+            //{
                 this.rightAppsListBox.Visibility = Visibility.Collapsed;
                 rightAppContentPresenter.Visibility = Visibility.Visible;
-            }
+            //}
 
             areAppsShown = false;
 
@@ -223,13 +223,13 @@ namespace ZU.Apps.Austin3
 
             HideAppsScroller();
 
-            leftAppContentPresenter.Visibility = Visibility.Visible;
-            leftAppContentPresenter.Content = this.JournalPageLeftInstance;
+            leftAppContentPresenter.Visibility = Visibility.Collapsed;
+            //leftAppContentPresenter.Content = this.JournalPageLeftInstance;
 
-            if (rightAppContentPresenter.Content == this.journalPageRightInstance)
-            {
-                this.JournalPageRightInstance.PageNumber = 2;
-            }
+            //if (rightAppContentPresenter.Content == this.journalPageRightInstance)
+            //{
+            //    this.JournalPageRightInstance.PageNumber = 2;
+            //}
         }
 
         private void JournalPageClicked_RightSide(object sender, MouseButtonEventArgs e)
@@ -238,13 +238,13 @@ namespace ZU.Apps.Austin3
 
             HideAppsScroller();
 
-            rightAppContentPresenter.Visibility = Visibility.Visible;
-            rightAppContentPresenter.Content = this.JournalPageRightInstance;
+            rightAppContentPresenter.Visibility = Visibility.Collapsed;
+            //rightAppContentPresenter.Content = this.JournalPageRightInstance;
 
-            if (leftAppContentPresenter.Content == this.journalPageLeftInstance)
-            {
-                this.JournalPageRightInstance.PageNumber = 2;
-            }
+            //if (leftAppContentPresenter.Content == this.journalPageLeftInstance)
+            //{
+            //    this.JournalPageRightInstance.PageNumber = 2;
+            //}
         }
     } // class
 } // namespace
