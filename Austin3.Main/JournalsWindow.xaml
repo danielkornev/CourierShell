@@ -568,7 +568,7 @@
 
             </Grid.Effect>
 
-            <Border CornerRadius="5" Background="#FF000000">
+            <Border CornerRadius="5,5,0,0" Background="#FF000000">
                 <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="40" Height="40" Margin="0,5,0,5" x:Name="switchAppsButton" Click="SwitchAppsButton_Click" Style="{DynamicResource ControlAreaButtonsStyle}">
                     <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
                         <Grid>
