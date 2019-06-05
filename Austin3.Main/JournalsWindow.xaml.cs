@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZU.Apps.Austin3.Storage;
 using ZU.Apps.Austin3.Surfaces;
 using ZU.Apps.Austin3.Surfaces.Camera;
 using ZU.Apps.Austin3.Surfaces.Journal;
@@ -23,6 +24,7 @@ namespace ZU.Apps.Austin3
     /// </summary>
     public partial class JournalsWindow : Window
     {
+        #region Fields
         JournalsApp journalsAppRightInstance;
         JournalsApp journalsAppLeftInstance;
 
@@ -31,29 +33,11 @@ namespace ZU.Apps.Austin3
         JournalPage journalPageLeftInstance;
         JournalPage journalPageRightInstance;
 
-        public JournalsWindow()
-        {
-            InitializeComponent();
-
-            this.Loaded += JournalsWindow_Loaded;
-        }
-
-        private void JournalsWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            this.ShowInTaskbar = true;
-            this.ShowActivated = true;
-
-            this.WindowStyle = WindowStyle.SingleBorderWindow;
-            this.WindowState = WindowState.Maximized;
-
-
-           
-        }
-
         bool areAppsShown = false;
+        private StorageContext storageContext;
+        #endregion
 
-        
-
+        #region Properties
         public CameraPage CameraAppInstance
         {
             get
@@ -104,6 +88,34 @@ namespace ZU.Apps.Austin3
                 return this.journalPageRightInstance;
             }
         }
+        #endregion
+
+        public JournalsWindow()
+        {
+            InitializeComponent();
+
+            this.Loaded += JournalsWindow_Loaded;
+
+            this.storageContext = new StorageContext();
+
+            
+        }
+
+        private void JournalsWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.ShowInTaskbar = true;
+            this.ShowActivated = true;
+
+            this.WindowStyle = WindowStyle.SingleBorderWindow;
+            this.WindowState = WindowState.Maximized;
+
+
+           
+        }
+
+        
+
+        
 
         private void SwitchAppsButton_Click(object sender, RoutedEventArgs e)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,7 +34,9 @@ namespace ZU.Apps.Austin3.Storage
         public Color FrontCoverColor { get; set; }
         #endregion
 
-
+        #region Collections
+        public ObservableCollection<JournalPageEntity> Pages { get; set; }
+        #endregion
 
     } // class
 } // namespace
