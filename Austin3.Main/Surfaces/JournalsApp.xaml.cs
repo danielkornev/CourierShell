@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZU.Apps.Austin3.Storage;
 
 namespace ZU.Apps.Austin3.Surfaces
 {
@@ -29,7 +30,7 @@ namespace ZU.Apps.Austin3.Surfaces
 
         private void JournalsApp_Loaded(object sender, RoutedEventArgs e)
         {
-            var n1 = new Entity
+            var n1 = new JournalEntity
             {
                 FrontCoverBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom(Constants.Colors.Violet)),
                 FrontCoverColor = (Color)ColorConverter.ConvertFromString(Constants.Colors.Violet),
@@ -39,7 +40,7 @@ namespace ZU.Apps.Austin3.Surfaces
                 Y = 490
             };
 
-            var n2 = new Entity
+            var n2 = new JournalEntity
             {
                 FrontCoverBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom(Constants.Colors.LightBlue)),
                 FrontCoverColor = (Color)ColorConverter.ConvertFromString(Constants.Colors.LightBlue),
@@ -49,7 +50,7 @@ namespace ZU.Apps.Austin3.Surfaces
                 Y = 129
             };
 
-            var n3 = new Entity
+            var n3 = new JournalEntity
             {
                 FrontCoverBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom(Constants.Colors.BeautifulGreen)),
                 FrontCoverColor = (Color)ColorConverter.ConvertFromString(Constants.Colors.BeautifulGreen),
@@ -59,7 +60,7 @@ namespace ZU.Apps.Austin3.Surfaces
                 Y = 100
             };
 
-            var n4 = new Entity
+            var n4 = new JournalEntity
             {
                 FrontCoverBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom(Constants.Colors.KingBrown)),
                 FrontCoverColor = (Color)ColorConverter.ConvertFromString(Constants.Colors.KingBrown),
