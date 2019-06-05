@@ -57,36 +57,36 @@ namespace ZU.Shared.Wpf.Controls
         }
 
         internal CornerOrigin origin = CornerOrigin.BottomRight;
-        private const double gripSize = 30;
+        private const double gripSize = 50;
         private PageStatus _status = PageStatus.None;
         internal Action<PageStatus> SetStatus = null;
         internal Read<PageStatus> GetStatus = null;
 
         public PageStatus Status
         {
-            private get 
+            private get
             {
                 if (GetStatus != null)
                     return GetStatus();
                 else
                     return _status;
             }
-            set 
-            { 
+            set
+            {
                 if (SetStatus != null)
                     SetStatus(value);
                 else
-                    _status = value; 
+                    _status = value;
                 gridShadow.Visibility = value == PageStatus.None ? Visibility.Hidden : Visibility.Visible;
                 canvasReflection.Visibility = value == PageStatus.None ? Visibility.Hidden : Visibility.Visible;
             }
         }
 
         private Point _cornerPoint;
-        
+
         private Point CornerPoint
         {
-            get { return (Point) GetValue(BookPage.CornerPointProperty); }
+            get { return (Point)GetValue(BookPage.CornerPointProperty); }
             set { SetValue(BookPage.CornerPointProperty, value); }
         }
 
@@ -94,30 +94,35 @@ namespace ZU.Shared.Wpf.Controls
         {
             pageReflection.Opacity = parameters.Page0ShadowOpacity;
 
-            rectangleRotate.Angle = parameters.Page1RotateAngle; 
-            rectangleRotate.CenterX = parameters.Page1RotateCenterX; 
-            rectangleRotate.CenterY = parameters.Page1RotateCenterY; 
-            rectangleTranslate.X = parameters.Page1TranslateX; 
-            rectangleTranslate.Y = parameters.Page1TranslateY; 
+            rectangleRotate.Angle = parameters.Page1RotateAngle;
+            rectangleRotate.CenterX = parameters.Page1RotateCenterX;
+            rectangleRotate.CenterY = parameters.Page1RotateCenterY;
+            rectangleTranslate.X = parameters.Page1TranslateX;
+            rectangleTranslate.Y = parameters.Page1TranslateY;
             clippingFigure.Figures.Clear();
-            clippingFigure.Figures.Add(parameters.Page1ClippingFigure); 
-            
-            RectangleGeometry rg = (RectangleGeometry) clippingPage0.Geometry1;
+            clippingFigure.Figures.Add(parameters.Page1ClippingFigure);
+
+            RectangleGeometry rg = (RectangleGeometry)clippingPage0.Geometry1;
             rg.Rect = new Rect(parameters.RenderSize);
-            PathGeometry pg = (PathGeometry) clippingPage0.Geometry2;
+            PathGeometry pg = (PathGeometry)clippingPage0.Geometry2;
             pg.Figures.Clear();
             pg.Figures.Add(parameters.Page2ClippingFigure);
 
             pageReflection.StartPoint = parameters.Page1ReflectionStartPoint;
             pageReflection.EndPoint = parameters.Page1ReflectionEndPoint;
-            
+
             pageShadow.StartPoint = parameters.Page0ShadowStartPoint;
             pageShadow.EndPoint = parameters.Page0ShadowEndPoint;
         }
 
         private void OnMouseMove(object sender, MouseEventArgs args)
         {
-            if ((Status == PageStatus.DropAnimation) || (Status == PageStatus.TurnAnimation))
+            if ((args.StylusDevice != null))
+            {
+                if (args.StylusDevice.TabletDevice.Type == TabletDeviceType.Stylus) return;
+            }
+
+            if ((Status == PageStatus.DropAnimation) || (Status == PageStatus.TurnAnimation) || (Status == PageStatus.Inking))
                 return;
 
             //Application.Current.MainWindow.Title += "M";
@@ -148,7 +153,7 @@ namespace ZU.Shared.Wpf.Controls
                 ApplyParameters(parameters.Value);
         }
 
-        private static int ComputeAnimationDuration(UIElement source, Point p, CornerOrigin origin) 
+        private static int ComputeAnimationDuration(UIElement source, Point p, CornerOrigin origin)
         {
             double ratio = ComputeProgressRatio(source, p, origin);
 
@@ -168,12 +173,12 @@ namespace ZU.Shared.Wpf.Controls
 
             //UIElement source = sender as UIElement;
             //Point p = args.GetPosition(source);
-            
+
             //if (GetCorner(source, p).HasValue)
             //    TurnPage(animationDuration);
         }
 
-        private CornerOrigin? GetCorner(UIElement source, Point position) 
+        private CornerOrigin? GetCorner(UIElement source, Point position)
         {
             CornerOrigin? result = null;
 
@@ -196,7 +201,12 @@ namespace ZU.Shared.Wpf.Controls
 
         private void OnMouseDown(object sender, MouseButtonEventArgs args)
         {
-            if ((Status == PageStatus.DropAnimation) || (Status == PageStatus.TurnAnimation))
+            if ((args.StylusDevice!=null))
+            {
+                if (args.StylusDevice.TabletDevice.Type == TabletDeviceType.Stylus) return;
+            }
+
+            if ((Status == PageStatus.DropAnimation) || (Status == PageStatus.TurnAnimation) || (Status == PageStatus.Inking))
                 return;
 
             UIElement source = sender as UIElement;
@@ -216,6 +226,11 @@ namespace ZU.Shared.Wpf.Controls
         }
         private void OnMouseUp(object sender, MouseButtonEventArgs args)
         {
+            if ((args.StylusDevice != null))
+            {
+                if (args.StylusDevice.TabletDevice.Type == TabletDeviceType.Stylus) return;
+            }
+
             if (this.IsMouseCaptured)
             {
                 Status = PageStatus.None;
@@ -234,6 +249,11 @@ namespace ZU.Shared.Wpf.Controls
 
         private void OnMouseLeave(object sender, MouseEventArgs args) 
         {
+            if ((args.StylusDevice != null))
+            {
+                if (args.StylusDevice.TabletDevice.Type == TabletDeviceType.Stylus) return;
+            }
+
             if (Status == PageStatus.DraggingWithoutCapture)
             {
                 //DropPage(ComputeAnimationDuration(source, p));
