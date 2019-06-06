@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              Height="240" Width="180">
-    <Border BorderBrush="Transparent" Background="Transparent">
+    <Border BorderBrush="Transparent" Background="Transparent" Margin="20">
         <Grid Name="LayoutRoot" Width="Auto" Height="Auto" PreviewMouseMove="dragMe" PreviewMouseUp="killDrag" MouseEnter="LayoutRoot_MouseEnter" MouseLeave="LayoutRoot_MouseLeave" MouseLeftButtonDown="LayoutRoot_MouseLeftButtonDown">
             <Rectangle Name="rectangle" Stroke="#7F84CDFF" RadiusX="3" RadiusY="3" StrokeThickness="1" Opacity="0" Margin="-5,-5,-5,-5">
                 <Rectangle.Fill>
@@ -15,7 +15,7 @@
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
-            <Image Name="fileIcon" Source="/Austin3.Main;component/Resources/Objects/Pictures-WF.png" Stretch="Fill" VerticalAlignment="Top" Width="48" Height="48" Margin="0,0,0,0" />
+            <Image Name="fileIcon" Source="/Austin3.Main;component/Resources/Objects/Pictures-WF.png" Stretch="None" VerticalAlignment="Center" Width="48" Height="48" Margin="0,0,0,0" />
             <Grid Name="picview" Margin="0,0,0,0" VerticalAlignment="Center" Height="Auto" HorizontalAlignment="Center" Width="Auto" Visibility="Collapsed">
                 <Rectangle Name="picBBG" Stroke="#FF8E8E8E" StrokeThickness="1" Height="Auto">
                     <Rectangle.Fill>
@@ -33,7 +33,7 @@
                         </RadialGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Image Name="loadIMG" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="180" MaxHeight="240" Stretch="Uniform" SizeChanged="loadIMG_SizeChanged" />
+                <Image Name="loadIMG" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="140" MaxHeight="200" Stretch="Uniform" SizeChanged="loadIMG_SizeChanged" />
             </Grid>
         </Grid>
     </Border>

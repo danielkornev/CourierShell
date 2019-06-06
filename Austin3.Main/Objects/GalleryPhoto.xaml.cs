@@ -31,28 +31,6 @@ namespace Austin3.Main.Objects
 
         public FileInfo ImageFile { get; set; }
 
-        public ImageSource Image
-        {
-            get { return (ImageSource)GetValue(ImageProperty); }
-            set { SetValue(ImageProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Image.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ImageProperty =
-            DependencyProperty.Register("Image", typeof(ImageSource), typeof(GalleryPhoto), new PropertyMetadata(ImageChanged));
-
-        private static void ImageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            GalleryPhoto page = d as GalleryPhoto;
-            page.OnImageChanged(page, e);
-        }
-
-        private void OnImageChanged(GalleryPhoto page, DependencyPropertyChangedEventArgs e)
-        {
-            //if (this.Image != null)
-            //    this.loadIMG.Source = this.Image;
-        }
-
         public GalleryPhoto()
         {
             InitializeComponent();
@@ -98,23 +76,23 @@ namespace Austin3.Main.Objects
 
         private void LayoutRoot_MouseEnter(object sender, MouseEventArgs e)
         {
-            if (!isSelected)
-            {
-                rectangle.Opacity = 0.5;
-            }
+            //if (!isSelected)
+            //{
+            //    rectangle.Opacity = 0.5;
+            //}
         }
 
         private void LayoutRoot_MouseLeave(object sender, MouseEventArgs e)
         {
-            if (!isSelected)
-            {
-                rectangle.Opacity = 0.0;
-            }
+            //if (!isSelected)
+            //{
+            //    rectangle.Opacity = 0.0;
+            //}
         }
 
         private void LayoutRoot_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            rectangle.Opacity = 1.0;
+            //rectangle.Opacity = 1.0;
         }
 
         private void dragMe(object sender, MouseEventArgs e)

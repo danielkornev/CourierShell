@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,8 @@ namespace ZU.Apps.Austin3.Surfaces.Camera
 
         ObservableCollection<GalleryPhoto> GalleryPhotos = new ObservableCollection<GalleryPhoto>();
 
+        FileSystemWatcher watcher;
+
         public GalleryPage()
         {
             bic = new BitmapImageCheck();
@@ -49,26 +52,29 @@ namespace ZU.Apps.Austin3.Surfaces.Camera
             var cameraDirectory = new System.IO.DirectoryInfo(
                 austinCameraFolder.Path);
 
+            // adding FileSystemWatcher
+            watcher = new FileSystemWatcher(cameraDirectory.FullName);
+            watcher.Created += Watcher_Created;
+            watcher.Renamed += Watcher_Renamed;
+            watcher.Deleted += Watcher_Deleted;
+            watcher.Changed += Watcher_Changed;
+
+            // enabling folder watching
+            watcher.EnableRaisingEvents = true;
+
+            // how to identify if contents changed?
 
             // obtaining files
             var items = cameraDirectory.GetFiles().ToList();
 
-            // this is super inefficient, but should enough for demo
+            // this is super inefficient, but should be good enough for demo
             foreach (var item in items)
             {
                 var path = item.FullName;
                 if (bic.IsExtensionSupported(path))
                 {
-                    BitmapImage myImageSource = new BitmapImage();
-                    myImageSource.BeginInit();
-                    myImageSource.UriSource = new Uri(path);
-                    myImageSource.EndInit();
-
-                    myImageSource.Freeze();
-
                     GalleryPhotos.Add(new GalleryPhoto
                     {
-                        Image = myImageSource,
                         ImageFile = item
                     });
                 }
@@ -77,7 +83,83 @@ namespace ZU.Apps.Austin3.Surfaces.Camera
             // showing (this is super inefficient, I know)
             foreach (var item in GalleryPhotos)
             {
-                this.photoGalleryPanel.Children.Add(item);
+                this.photoGalleryPanel.Items.Add(item);
+            }
+        }
+
+        private void Watcher_Changed(object sender, FileSystemEventArgs e)
+        {
+            if (bic.IsExtensionSupported(e.FullPath) == false) return;
+
+            // TODO
+        }
+
+        private void Watcher_Deleted(object sender, FileSystemEventArgs e)
+        {
+            if (bic.IsExtensionSupported(e.FullPath) == false) return;
+
+            try
+            {
+                var samePhotos = this.GalleryPhotos.Where(i => i.ImageFile.FullName == e.FullPath).ToList();
+                if (samePhotos.Count() == 1)
+                {
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        var item = samePhotos.First();
+
+                        this.photoGalleryPanel.Items.Remove(item);
+
+                        this.GalleryPhotos.Remove(item);
+                    });
+                }
+            }
+            catch
+            {
+
+            }
+           
+        }
+
+        private void Watcher_Renamed(object sender, RenamedEventArgs e)
+        {
+            if (bic.IsExtensionSupported(e.FullPath) == false) return;
+
+            if (System.IO.File.Exists(e.FullPath) == false) return;
+
+            // this is a bit harder; we should find it and change an image;
+            // TODO
+        }
+
+        private void Watcher_Created(object sender, FileSystemEventArgs e)
+        {
+            if (bic.IsExtensionSupported(e.FullPath) == false) return;
+
+            if (System.IO.File.Exists(e.FullPath) == false) return;
+
+            try
+            {
+                var file = new FileInfo(e.FullPath);
+
+                var samePhotos = this.GalleryPhotos.Where(i => i.ImageFile.FullName == file.FullName).ToList();
+                if (samePhotos.Count() == 0)
+                {
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        this.GalleryPhotos.Add(new GalleryPhoto
+                        {
+                            ImageFile = file
+                        });
+
+                        this.photoGalleryPanel.Items.Add(new GalleryPhoto
+                        {
+                            ImageFile = file
+                        });
+                    });
+                }
+            }
+            catch
+            {
+
             }
         }
 
