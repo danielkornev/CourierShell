@@ -7,9 +7,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+
 using Windows.Devices.Enumeration;
+using Windows.Foundation;
 using Windows.Graphics.Display;
+using Windows.Graphics.Imaging;
 using Windows.Media.Capture;
+using Windows.Media.MediaProperties;
+using Windows.Storage;
+using Windows.Storage.FileProperties;
+using Windows.Storage.Streams;
 using Windows.System.Display;
 using Windows.UI.Core;
 
@@ -163,9 +170,31 @@ namespace ZU.Apps.Austin3.Surfaces.Camera
             MaxResolution = allStreamProperties.FirstOrDefault();
         }
 
-        private void SomeButton_Click(object sender, RoutedEventArgs e)
+        private async void SomeButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            var myPictures = await Windows.Storage.StorageLibrary.GetLibraryAsync(Windows.Storage.KnownLibraryId.Pictures);
+            StorageFile file = await myPictures.SaveFolder.CreateFileAsync("austin3_photo.jpg", CreationCollisionOption.GenerateUniqueName);
+
+            using (var captureStream = new InMemoryRandomAccessStream())
+            {
+                await mediaCapture.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(), captureStream);
+
+                using (var fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
+                {
+                    var decoder = await BitmapDecoder.CreateAsync(captureStream);
+                    var encoder = await BitmapEncoder.CreateForTranscodingAsync(fileStream, decoder);
+
+                    var properties = new BitmapPropertySet {
+                    {
+                            "System.Photo.Orientation",
+                            new BitmapTypedValue(PhotoOrientation.Normal, PropertyType.UInt16) }
+                    };
+
+                    await encoder.BitmapProperties.SetPropertiesAsync(properties);
+
+                    await encoder.FlushAsync();
+                }
+            }
         }
     } // class
 } // namespace
