@@ -1,4 +1,4 @@
-﻿namespace Thriple.Easing
+﻿namespace ZU.Shared.Wpf.Easing
 {
 	/// <summary>
 	/// Identifiers for the easing equations made available by methods in the EasingEquations class.

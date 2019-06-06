@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Thriple.Controls.Internal
+namespace ZU.Shared.Wpf.Controls.Internal
 {
 	[ValueConversion(typeof(DependencyObject), typeof(DependencyObject))]
 	internal class ContentValueConverter : IValueConverter

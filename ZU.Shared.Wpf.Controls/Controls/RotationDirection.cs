@@ -1,4 +1,4 @@
-﻿namespace Thriple.Controls
+﻿namespace ZU.Shared.Wpf.Controls
 {
 	/// <summary>
 	/// Indicates the directions in which a ContentControl3D can rotate.

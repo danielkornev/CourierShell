@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media.Media3D;
 
-namespace Thriple.Panels.Internal
+namespace ZU.Shared.Wpf.Panels.Internal
 {
     /// <summary>
     /// A Viewport3D subclass that shields Panel3D from needing to arrange the 

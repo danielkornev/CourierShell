@@ -5,9 +5,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Media3D;
-using Thriple.Easing;
+using ZU.Shared.Wpf.Easing;
 
-namespace Thriple.Controls
+namespace ZU.Shared.Wpf.Controls
 {
 	/// <summary>
 	/// A ContentControl that provides the ability to rotate in 3D to show its BackContent.

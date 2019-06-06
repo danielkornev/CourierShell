@@ -4,7 +4,7 @@ This work is subject to the terms in http://www.robertpenner.com/easing_terms_of
 */
 using System;
 
-namespace Thriple.Easing
+namespace ZU.Shared.Wpf.Easing
 {
 	/// <summary>
 	/// This class contains easing equations created by Robert Penner.

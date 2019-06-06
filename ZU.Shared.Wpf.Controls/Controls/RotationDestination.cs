@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Thriple.Controls
+namespace ZU.Shared.Wpf.Controls
 {
 	/// <summary>
 	/// Contains the available destinations for a rotation of ContentControl3D.

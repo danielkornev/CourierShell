@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Media.Animation;
 
-namespace Thriple.Easing
+namespace ZU.Shared.Wpf.Easing
 {
 	/// <summary>
 	/// A DoubleAnimation with support for using Penner easing equations to provide

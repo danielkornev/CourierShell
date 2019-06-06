@@ -35,7 +35,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Thriple.Panels.Internal
+namespace ZU.Shared.Wpf.Panels.Internal
 {
     internal class DisconnectedUIElementCollection : UIElementCollection, INotifyCollectionChanged
     {

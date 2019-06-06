@@ -28,7 +28,7 @@
 
 using System.Windows;
 
-namespace Thriple.Panels.Internal
+namespace ZU.Shared.Wpf.Panels.Internal
 {
     /// <summary>
     /// This panel extends ConceptualPanel by ensuring that its conceptual children are also "logical" children.  

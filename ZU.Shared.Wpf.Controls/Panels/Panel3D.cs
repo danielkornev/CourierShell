@@ -8,9 +8,9 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Media3D;
 using System.Windows.Threading;
-using Thriple.Panels.Internal;
+using ZU.Shared.Wpf.Panels.Internal;
 
-namespace Thriple.Panels
+namespace ZU.Shared.Wpf.Panels
 {
     /// <summary>
     /// A Panel that displays its children in a Viewport3D.

@@ -33,7 +33,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Thriple.Panels.Internal
+namespace ZU.Shared.Wpf.Panels.Internal
 {
     /// <summary>
     /// This panel maintains a collection of conceptual children that are neither logical

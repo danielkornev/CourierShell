@@ -1,4 +1,4 @@
-﻿namespace Thriple.Controls
+﻿namespace ZU.Shared.Wpf.Controls
 {
 	public enum RotationEasingMode
 	{
