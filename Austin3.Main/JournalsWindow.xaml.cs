@@ -33,6 +33,9 @@ namespace ZU.Apps.Austin3
         JournalPage journalPageLeftInstance;
         JournalPage journalPageRightInstance;
 
+        GalleryPage galleryAppLeftInstance;
+        GalleryPage galleryAppRightInstance;
+
         bool areAppsShown = false;
         private StorageContext storageContext;
         #endregion
@@ -86,6 +89,26 @@ namespace ZU.Apps.Austin3
                 if (journalPageRightInstance == null)
                     this.journalPageRightInstance = new JournalPage(Constants.Side.Right, 1);
                 return this.journalPageRightInstance;
+            }
+        }
+
+        public GalleryPage GalleryAppRightInstance
+        {
+            get
+            {
+                if (galleryAppRightInstance == null)
+                    this.galleryAppRightInstance = new GalleryPage(Constants.Side.Right);
+                return this.galleryAppRightInstance;
+            }
+        }
+
+        public GalleryPage GalleryAppLeftInstance
+        {
+            get
+            {
+                if (galleryAppLeftInstance == null)
+                    this.galleryAppLeftInstance = new GalleryPage(Constants.Side.Left);
+                return this.galleryAppLeftInstance;
             }
         }
         #endregion
@@ -245,6 +268,28 @@ namespace ZU.Apps.Austin3
             //{
             //    this.JournalPageRightInstance.PageNumber = 2;
             //}
+        }
+
+        private void GalleryAppClicked_RightSide(object sender, MouseButtonEventArgs e)
+        {
+            this.rightAppContentPresenter.Tag = "set";
+
+            HideAppsScroller();
+
+            rightAppContentPresenter.Visibility = Visibility.Visible;
+
+            rightAppContentPresenter.Content = this.GalleryAppRightInstance;
+        }
+
+        private void GalleryAppClicked_LeftSide(object sender, MouseButtonEventArgs e)
+        {
+            this.leftAppContentPresenter.Tag = "set";
+
+            HideAppsScroller();
+
+            leftAppContentPresenter.Visibility = Visibility.Visible;
+
+            leftAppContentPresenter.Content = this.GalleryAppLeftInstance;
         }
     } // class
 } // namespace

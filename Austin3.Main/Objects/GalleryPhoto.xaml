@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="Austin3.Main.Objects.GalleryPhoto"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Height="240" Width="180">
+    <Border BorderBrush="Transparent" Background="Transparent">
+        <Grid Name="LayoutRoot" Width="Auto" Height="Auto" PreviewMouseMove="dragMe" PreviewMouseUp="killDrag" MouseEnter="LayoutRoot_MouseEnter" MouseLeave="LayoutRoot_MouseLeave" MouseLeftButtonDown="LayoutRoot_MouseLeftButtonDown">
+            <Rectangle Name="rectangle" Stroke="#7F84CDFF" RadiusX="3" RadiusY="3" StrokeThickness="1" Opacity="0" Margin="-5,-5,-5,-5">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#66D1EDFF" Offset="0" />
+                        <GradientStop Color="#6684CDFF" Offset="1" />
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Image Name="fileIcon" Source="/Austin3.Main;component/Resources/Objects/Pictures-WF.png" Stretch="Fill" VerticalAlignment="Top" Width="48" Height="48" Margin="0,0,0,0" />
+            <Grid Name="picview" Margin="0,0,0,0" VerticalAlignment="Center" Height="Auto" HorizontalAlignment="Center" Width="Auto" Visibility="Collapsed">
+                <Rectangle Name="picBBG" Stroke="#FF8E8E8E" StrokeThickness="1" Height="Auto">
+                    <Rectangle.Fill>
+                        <RadialGradientBrush>
+                            <RadialGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                                    <SkewTransform AngleX="0" AngleY="0" />
+                                    <RotateTransform Angle="0" />
+                                    <TranslateTransform X="0.369" Y="0.401" />
+                                </TransformGroup>
+                            </RadialGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FFD8D8D8" Offset="0" />
+                            <GradientStop Color="#FFFFFFFF" Offset="1" />
+                        </RadialGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Image Name="loadIMG" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="180" MaxHeight="240" Stretch="Uniform" SizeChanged="loadIMG_SizeChanged" />
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

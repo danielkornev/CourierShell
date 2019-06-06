@@ -73,6 +73,7 @@
     <Compile Include="Controls\LinearGradientHelper.cs" />
     <Compile Include="Controls\PageParameters.cs" />
     <Compile Include="Controls\PageStatus.cs" />
+    <Compile Include="Media\BitmapImageCheck.cs" />
     <Compile Include="Panels\Internal\ConceptualPanel.cs" />
     <Compile Include="Panels\Internal\DisconnectedUIElementCollection.cs" />
     <Compile Include="Panels\Internal\LogicalPanel.cs" />

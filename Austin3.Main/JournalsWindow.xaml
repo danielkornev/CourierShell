@@ -303,7 +303,7 @@
 
                                 <ListBoxItem DataContext="Gallery">
                                     <Viewbox>
-                                        <Grid>
+                                        <Grid Background="#01000000" MouseLeftButtonDown="GalleryAppClicked_LeftSide">
                                             <Grid.Effect>
                                                 <DropShadowEffect Color="#FF646464" BlurRadius="50" ShadowDepth="0" Direction="0"/>
                                             </Grid.Effect>
@@ -491,7 +491,7 @@
 
                     <ListBoxItem DataContext="Gallery">
                         <Viewbox>
-                            <Grid>
+                        <Grid Background="#01000000" MouseLeftButtonDown="GalleryAppClicked_RightSide">
                                 <Grid.Effect>
                                     <DropShadowEffect Color="#FF646464" BlurRadius="50" ShadowDepth="0" Direction="0"/>
                                 </Grid.Effect>

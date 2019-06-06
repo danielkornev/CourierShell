@@ -9,7 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
-namespace ZU.Shared.Wpf.Controls.Controls
+namespace ZU.Shared.Wpf.Controls
 {
     public class ArrangePanel : Panel
     {
