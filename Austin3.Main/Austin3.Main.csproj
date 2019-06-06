@@ -136,10 +136,6 @@
       <Project>{b00a11f2-e99c-47ca-8202-37bd1a59deb9}</Project>
       <Name>Austin3Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ZU.Shared.Wpf.MitsuControls\ZU.Shared.Wpf.Controls.csproj">
-      <Project>{dbc99c0e-f918-4e3b-b154-c03e212d8aca}</Project>
-      <Name>ZU.Shared.Wpf.Controls</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ZU.Shared.Wpf\ZU.Shared.Wpf.csproj">
       <Project>{89955544-91a1-472d-a337-56142620e864}</Project>
       <Name>ZU.Shared.Wpf</Name>

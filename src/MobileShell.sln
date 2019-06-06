@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Austin3Core", "..\Austin3Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Austin3.Main", "..\Austin3.Main\Austin3.Main.csproj", "{7C783C75-2832-46E3-BE5A-3086059F88DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZU.Shared.Wpf.Controls", "..\ZU.Shared.Wpf.MitsuControls\ZU.Shared.Wpf.Controls.csproj", "{DBC99C0E-F918-4E3B-B154-C03E212D8ACA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZU.Shared.Wpf.Controls", "..\ZU.Shared.Wpf.Controls\ZU.Shared.Wpf.Controls.csproj", "{DBC99C0E-F918-4E3B-B154-C03E212D8ACA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

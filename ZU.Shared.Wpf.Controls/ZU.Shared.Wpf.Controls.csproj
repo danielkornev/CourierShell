@@ -55,22 +55,35 @@
     <Reference Include="System.IdentityModel" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Book.cs" />
-    <Compile Include="BookPage.xaml.cs">
+    <Compile Include="Controls\Book.cs" />
+    <Compile Include="Controls\BookPage.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>BookPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CornerOrigin.cs" />
-    <Compile Include="LinearGradientHelper.cs" />
-    <Compile Include="PageParameters.cs" />
-    <Compile Include="PageStatus.cs" />
+    <Compile Include="Controls\ContentControl3D.cs" />
+    <Compile Include="Controls\Internal\ContentValueConverter.cs" />
+    <Compile Include="Controls\RotationDestination.cs" />
+    <Compile Include="Controls\RotationDirection.cs" />
+    <Compile Include="Controls\RotationEasingMode.cs" />
+    <Compile Include="Controls\CornerOrigin.cs" />
+    <Compile Include="Easing\EasingDoubleAnimation.cs" />
+    <Compile Include="Easing\EasingEquation.cs" />
+    <Compile Include="Easing\EasingEquations.cs" />
+    <Compile Include="Controls\LinearGradientHelper.cs" />
+    <Compile Include="Controls\PageParameters.cs" />
+    <Compile Include="Controls\PageStatus.cs" />
+    <Compile Include="Panels\Internal\ConceptualPanel.cs" />
+    <Compile Include="Panels\Internal\DisconnectedUIElementCollection.cs" />
+    <Compile Include="Panels\Internal\LogicalPanel.cs" />
+    <Compile Include="Panels\Internal\Viewport3DEx.cs" />
+    <Compile Include="Panels\Panel3D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="BookPage.Compute.cs" />
+    <Compile Include="Controls\BookPage.Compute.cs" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -88,11 +101,11 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Book.xaml">
+    <Page Include="Controls\Book.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="BookPage.xaml">
+    <Page Include="Controls\BookPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
