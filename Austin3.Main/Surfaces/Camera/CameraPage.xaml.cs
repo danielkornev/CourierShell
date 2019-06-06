@@ -59,6 +59,19 @@ namespace ZU.Apps.Austin3.Surfaces.Camera
         {
             var encodingProperties = MaxResolution.EncodingProperties;
             await mediaCapture.VideoDeviceController.SetMediaStreamPropertiesAsync(MediaStreamType.VideoPreview, encodingProperties);
+
+            var width = cameraCapturePreview.ActualWidth;
+            var height = cameraCapturePreview.ActualHeight;
+
+            var actualWidth = MaxResolution.Width;
+            var actualHeight = MaxResolution.Height;
+
+            double coeff = 1;
+
+            coeff = width / actualWidth;
+
+            picview.Width = width +2.0;
+            picview.Height = actualHeight * coeff  + 2.0;
         }
 
         private async Task StartPreviewAsync()

@@ -62,11 +62,25 @@
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
+        <Grid Grid.Row="0">
+            <Grid Background="Transparent" Margin="20">
+                <Rectangle Name="rectangle" Stroke="#7F84CDFF" RadiusX="3" RadiusY="3" StrokeThickness="1" Opacity="0" Margin="-5">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#66D1EDFF" Offset="0" />
+                            <GradientStop Color="#6684CDFF" Offset="1" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Grid Name="picview" Margin="10" VerticalAlignment="Stretch" Height="Auto" HorizontalAlignment="Stretch" Width="Auto" Visibility="Visible" Background="White">
 
+                    <hosting:WindowsXamlHost Margin="5,5,5,5" x:Name="cameraCapturePreview" InitialTypeName="Windows.UI.Xaml.Controls.CaptureElement" ChildChanged="CameraCapturePreview_ChildChanged">
 
-        <hosting:WindowsXamlHost Grid.Row="0" Margin="-1" x:Name="cameraCapturePreview" InitialTypeName="Windows.UI.Xaml.Controls.CaptureElement" ChildChanged="CameraCapturePreview_ChildChanged">
+                    </hosting:WindowsXamlHost>
+                </Grid>
+            </Grid>
+        </Grid>
 
-        </hosting:WindowsXamlHost>
         <StackPanel Grid.Row="1" Margin="-1" Orientation="Vertical" >
 
             <Button x:Name="someButton" Width="40" Height="40" HorizontalAlignment="Center" Margin="0,10,0,10" Click="SomeButton_Click" Style="{DynamicResource TakePhotoButtonTemplate}">

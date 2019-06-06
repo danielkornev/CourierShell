@@ -31,6 +31,9 @@ namespace Austin3.Main.Objects
 
         public FileInfo ImageFile { get; set; }
 
+        public double ImageWidth { get; set; }
+        public double ImageHeight { get; set; }
+
         public GalleryPhoto()
         {
             InitializeComponent();
@@ -48,24 +51,40 @@ namespace Austin3.Main.Objects
             picTimer.Tick += PicTimer_Tick;
         }
 
+        public void Refresh()
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                // restarting the process of obtaining an image
+                picTimer.Start();
+            });
+        }
+
         private void PicTimer_Tick(object sender, EventArgs e)
         {
-            fileIcon.Visibility = Visibility.Collapsed;
-            picview.Visibility = Visibility.Visible;
-            System.Drawing.Image image = System.Drawing.Image.FromFile(ImageFile.FullName);
-            loadIMG.Width = (double)image.PhysicalDimension.Width;
-            loadIMG.Height = (double)image.PhysicalDimension.Height;
-            BitmapImage bitmapImage = new BitmapImage();
-            MemoryStream memoryStream = new MemoryStream(File.ReadAllBytes(ImageFile.FullName));
-            bitmapImage.BeginInit();
-            bitmapImage.DecodePixelHeight = 240;
-            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-            bitmapImage.StreamSource = memoryStream;
-            bitmapImage.EndInit();
-            memoryStream.Dispose();
-            loadIMG.Source = bitmapImage;
-            memoryStream = null;
-            bitmapImage = null;
+            try
+            {
+                fileIcon.Visibility = Visibility.Collapsed;
+                picview.Visibility = Visibility.Visible;
+
+                loadIMG.Width = this.ImageWidth;
+                loadIMG.Height = this.ImageHeight;
+                BitmapImage bitmapImage = new BitmapImage();
+                MemoryStream memoryStream = new MemoryStream(File.ReadAllBytes(ImageFile.FullName));
+                bitmapImage.BeginInit();
+                bitmapImage.DecodePixelHeight = 240;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.StreamSource = memoryStream;
+                bitmapImage.EndInit();
+                memoryStream.Dispose();
+                loadIMG.Source = bitmapImage;
+                memoryStream = null;
+                bitmapImage = null;
+            }
+            catch
+            {
+
+            }
         }
 
         private void loadIMG_SizeChanged(object sender, SizeChangedEventArgs e)

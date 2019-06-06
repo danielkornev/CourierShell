@@ -70,14 +70,19 @@ namespace ZU.Apps.Austin3.Surfaces.Camera
             // this is super inefficient, but should be good enough for demo
             foreach (var item in items)
             {
-                var path = item.FullName;
-                if (bic.IsExtensionSupported(path))
+                // checking for file size 
+                if (item.Length == 0) continue;
+
+                try
                 {
-                    GalleryPhotos.Add(new GalleryPhoto
-                    {
-                        ImageFile = item
-                    });
+                    AddImageToGalleryPhotosCollection(item);
                 }
+                catch
+                {
+
+                }
+
+
             }
 
             // showing (this is super inefficient, I know)
@@ -87,11 +92,71 @@ namespace ZU.Apps.Austin3.Surfaces.Camera
             }
         }
 
+        private GalleryPhoto AddImageToGalleryPhotosCollection(FileInfo item)
+        {
+            double width, height;
+
+            var bitmapFrame = BitmapFrame.Create(new Uri(item.FullName), BitmapCreateOptions.DelayCreation, BitmapCacheOption.None);
+            width = (double)bitmapFrame.PixelWidth;
+            height = (double)bitmapFrame.PixelHeight;
+
+            var path = item.FullName;
+            if (bic.IsExtensionSupported(path))
+            {
+                var gp = new GalleryPhoto
+                {
+                    ImageFile = item,
+                    ImageHeight = height,
+                    ImageWidth = width
+                };
+
+                GalleryPhotos.Add(gp);
+
+                return gp;
+            }
+
+            return null;
+        }
+
         private void Watcher_Changed(object sender, FileSystemEventArgs e)
         {
             if (bic.IsExtensionSupported(e.FullPath) == false) return;
 
+            if (System.IO.File.Exists(e.FullPath) == false) return;
             // TODO
+
+            try
+            {
+                var file = new FileInfo(e.FullPath);
+
+                if (file.Length == 0) return;
+
+                var samePhotos = this.GalleryPhotos.Where(i => i.ImageFile.FullName == file.FullName).ToList();
+                if (samePhotos.Count() == 0)
+                {
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        var gp = AddImageToGalleryPhotosCollection(file);
+
+                        if (gp == null) return;
+
+                        this.photoGalleryPanel.Items.Add(gp);
+                    });
+                }
+                else if (samePhotos.Count() == 1)
+                {
+                    var photo = samePhotos.First();
+
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        photo.Refresh();
+                    });
+                }
+            }
+            catch
+            {
+
+            }
         }
 
         private void Watcher_Deleted(object sender, FileSystemEventArgs e)
@@ -140,20 +205,18 @@ namespace ZU.Apps.Austin3.Surfaces.Camera
             {
                 var file = new FileInfo(e.FullPath);
 
+                if (file.Length == 0) return;
+
                 var samePhotos = this.GalleryPhotos.Where(i => i.ImageFile.FullName == file.FullName).ToList();
                 if (samePhotos.Count() == 0)
                 {
                     this.Dispatcher.Invoke(() =>
                     {
-                        this.GalleryPhotos.Add(new GalleryPhoto
-                        {
-                            ImageFile = file
-                        });
+                        var gp = AddImageToGalleryPhotosCollection(file);
 
-                        this.photoGalleryPanel.Items.Add(new GalleryPhoto
-                        {
-                            ImageFile = file
-                        });
+                        if (gp == null) return;
+
+                        this.photoGalleryPanel.Items.Add(gp);
                     });
                 }
             }
