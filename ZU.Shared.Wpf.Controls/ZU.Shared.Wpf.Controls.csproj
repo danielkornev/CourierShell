@@ -55,6 +55,7 @@
     <Reference Include="System.IdentityModel" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ArrangePanel.cs" />
     <Compile Include="Controls\Book.cs" />
     <Compile Include="Controls\BookPage.xaml.cs">
       <SubType>Code</SubType>
