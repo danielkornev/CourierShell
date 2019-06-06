@@ -173,7 +173,12 @@ namespace ZU.Apps.Austin3.Surfaces.Camera
         private async void SomeButton_Click(object sender, RoutedEventArgs e)
         {
             var myPictures = await Windows.Storage.StorageLibrary.GetLibraryAsync(Windows.Storage.KnownLibraryId.Pictures);
-            StorageFile file = await myPictures.SaveFolder.CreateFileAsync("austin3_photo.jpg", CreationCollisionOption.GenerateUniqueName);
+
+            var defaultSaveFolder = myPictures.SaveFolder;
+            // creating or getting Camera folder
+            var austinCameraFolder = await defaultSaveFolder.CreateFolderAsync("Camera", CreationCollisionOption.OpenIfExists);
+
+            StorageFile file = await austinCameraFolder.CreateFileAsync("austin3_photo.jpg", CreationCollisionOption.GenerateUniqueName);
 
             using (var captureStream = new InMemoryRandomAccessStream())
             {
