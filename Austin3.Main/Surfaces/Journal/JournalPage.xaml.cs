@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZU.Apps.Austin3.Storage;
+using ZU.Shared.Wpf.Ink;
 
 namespace ZU.Apps.Austin3.Surfaces.Journal
 {
@@ -22,6 +24,11 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
     public partial class JournalPage : UserControl
     {
         bool isPageLoaded = false;
+
+        public JournalPageEntity Context
+        {
+            get; internal set;
+        }
 
         public Constants.Side PageSide
         {
@@ -46,8 +53,6 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
 
             AdaptToSide(pageSide);
         }
-
-
 
         public int PageNumber
         {
@@ -84,6 +89,9 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
         {
             InitializeComponent();
 
+            // initializing platform
+            PlatformWpf.Init(this);
+
             this.Loaded += JournalPage_Loaded;
 
             this.inkCanvas.Loaded += InkCanvas_Loaded;
@@ -104,14 +112,27 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
             newAnalyzer.ResultsUpdated += new ResultsUpdatedEventHandler(newAnalyzer_ResultsUpdated);
 
             this.inkCanvas.StrokeCollected += InkCanvas_StrokeCollected;
-
-            
         }
 
         private void InkCanvas_StrokeCollected(object sender, InkCanvasStrokeCollectedEventArgs e)
         {
             try
             {
+                // saving
+                Context.InkStrokes = 
+                    InkStrokeCollectionConverter.InternalInstance.ConvertToString(this.inkCanvas.Strokes);
+
+                // saving
+                Context.StorageContext.SavePage(Context);
+
+                // checking if it's the last page or not
+                if (this.Context == Context.Journal.Pages.Last())
+                {
+                    // this is the last page
+                    // we shall add two more pages
+                    Context.Journal.AddTwoMorePages();
+                }
+
                 newAnalyzer.AddStroke(e.Stroke);
                 newAnalyzer.BackgroundAnalyze();
             }
@@ -132,7 +153,7 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
         {
             isPageLoaded = true;
 
-            AdaptToSide(this.PageSide);
+            //AdaptToSide(this.PageSide);
         }
 
         private void InkCanvas_TouchDown(object sender, TouchEventArgs e)
@@ -160,6 +181,38 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
         {
             if (e.StylusDevice.TabletDevice.Type == TabletDeviceType.Touch)
                 e.Handled = true;
+        }
+
+        private void JournalPage_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            // clearing Ink Layer
+            this.inkCanvas.Strokes.Clear();
+
+            //
+            var entity = this.DataContext as JournalPageEntity;
+
+            // but this is simply strange
+            if (entity == null)
+            {
+                var canvas = this.DataContext as System.Windows.Controls.Canvas;
+                if (canvas!=null)
+                {
+
+                    
+                }
+
+                return;
+            }
+
+            this.Context = entity;
+
+            if (Context.IsCoverPage) return;
+
+            if (Context.InkLayer == null) return;
+
+            // obtaining ink layer from the entity
+            this.inkCanvas.Strokes = Context.InkLayer;
+
         }
     } // class
 } // namespace

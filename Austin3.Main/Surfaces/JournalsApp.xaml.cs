@@ -32,9 +32,9 @@ namespace ZU.Apps.Austin3.Surfaces
 
         private void JournalsApp_Loaded(object sender, RoutedEventArgs e)
         {
-            if (StorageContext.Instance != null)
+            if (StorageContext.JournalsInstance != null)
             {
-                this.Context = StorageContext.Instance;
+                this.Context = StorageContext.JournalsInstance;
 
                 // Data Binding
                 this.journalsListBox.ItemsSource = this.Context.Journals;

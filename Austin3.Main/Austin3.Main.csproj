@@ -88,9 +88,6 @@
     <Compile Include="Surfaces\JournalsApp.xaml.cs">
       <DependentUpon>JournalsApp.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Surfaces\Journal\JournalFrontCover.xaml.cs">
-      <DependentUpon>JournalFrontCover.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Surfaces\Journal\JournalPage.xaml.cs">
       <DependentUpon>JournalPage.xaml</DependentUpon>
     </Compile>
@@ -127,10 +124,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Surfaces\JournalsApp.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Surfaces\Journal\JournalFrontCover.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

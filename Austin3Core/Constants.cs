@@ -26,5 +26,13 @@ namespace ZU.Apps.Austin3
             Right,
             Unknown
         }
+
+        public static class KnownEntities
+        {
+            /// <summary>
+            /// Used for the First Journal.
+            /// </summary>
+            public static Guid FirstJournal = Guid.Parse("0E4A20E5-5572-4C69-A2F0-9FE25276F1C5");
+        }
     } // class
 } // namespace

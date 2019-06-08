@@ -30,9 +30,6 @@ namespace ZU.Apps.Austin3
 
         CameraPage cameraPageInstance;
 
-        JournalPage journalPageLeftInstance;
-        JournalPage journalPageRightInstance;
-
         GalleryPage galleryAppLeftInstance;
         GalleryPage galleryAppRightInstance;
 
@@ -72,26 +69,6 @@ namespace ZU.Apps.Austin3
             }
         }
 
-        public JournalPage JournalPageLeftInstance
-        {
-            get
-            {
-                if (journalPageLeftInstance == null)
-                    this.journalPageLeftInstance = new JournalPage(Constants.Side.Left, 1);
-                return this.journalPageLeftInstance;
-            }
-        }
-
-        public JournalPage JournalPageRightInstance
-        {
-            get
-            {
-                if (journalPageRightInstance == null)
-                    this.journalPageRightInstance = new JournalPage(Constants.Side.Right, 1);
-                return this.journalPageRightInstance;
-            }
-        }
-
         public GalleryPage GalleryAppRightInstance
         {
             get
@@ -121,7 +98,17 @@ namespace ZU.Apps.Austin3
 
             this.storageContext = new StorageContext();
 
-            
+            // this should always return the last journal
+            var lastJournal = this.storageContext.Journals
+                .Where(j=>j.IsSoftedDeleted == false)
+                .OrderByDescending(j => j.DateUpdated)
+                .FirstOrDefault();
+
+            // loading pages
+            lastJournal.Pages.Load();
+
+            // binding
+            this.currentJournalBook.ItemsSource = lastJournal.Pages;
         }
 
         private void JournalsWindow_Loaded(object sender, RoutedEventArgs e)
@@ -247,12 +234,6 @@ namespace ZU.Apps.Austin3
             HideAppsScroller();
 
             leftAppContentPresenter.Visibility = Visibility.Collapsed;
-            //leftAppContentPresenter.Content = this.JournalPageLeftInstance;
-
-            //if (rightAppContentPresenter.Content == this.journalPageRightInstance)
-            //{
-            //    this.JournalPageRightInstance.PageNumber = 2;
-            //}
         }
 
         private void JournalPageClicked_RightSide(object sender, MouseButtonEventArgs e)
@@ -262,12 +243,6 @@ namespace ZU.Apps.Austin3
             HideAppsScroller();
 
             rightAppContentPresenter.Visibility = Visibility.Collapsed;
-            //rightAppContentPresenter.Content = this.JournalPageRightInstance;
-
-            //if (leftAppContentPresenter.Content == this.journalPageLeftInstance)
-            //{
-            //    this.JournalPageRightInstance.PageNumber = 2;
-            //}
         }
 
         private void GalleryAppClicked_RightSide(object sender, MouseButtonEventArgs e)

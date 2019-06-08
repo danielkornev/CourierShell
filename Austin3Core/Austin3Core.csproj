@@ -48,7 +48,14 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\JournalPagesObservableCollection.cs" />
+    <Compile Include="Collections\JournalsObservableCollection.cs" />
+    <Compile Include="Collections\RangeObservableCollection.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Platform.cs" />
+    <Compile Include="PlatformWpf.cs" />
+    <Compile Include="Wpf\Ink\InkStrokeCollectionConverter.cs" />
+    <Compile Include="Wpf\InvertedBooleanToVisibilityConverter.cs" />
     <Compile Include="Storage\JournalEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
