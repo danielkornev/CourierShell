@@ -112,6 +112,29 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
             newAnalyzer.ResultsUpdated += new ResultsUpdatedEventHandler(newAnalyzer_ResultsUpdated);
 
             this.inkCanvas.StrokeCollected += InkCanvas_StrokeCollected;
+            this.inkCanvas.StrokeErased += InkCanvas_StrokeErased;
+
+            //this.inkCanvas.PreviewTouchUp += InkCanvas_PreviewTouchUp;
+        }
+
+        private void InkCanvas_StrokeErased(object sender, RoutedEventArgs e)
+        {
+            this.pageNumberAndOptionsGrid.Visibility = Visibility.Hidden;
+
+            try
+            {
+                // saving
+                Context.InkStrokes =
+                    InkStrokeCollectionConverter.InternalInstance.ConvertToString(this.inkCanvas.Strokes);
+
+                // saving
+                Context.StorageContext.SavePage(Context);
+            }
+
+            catch
+            {
+
+            }
         }
 
         private void InkCanvas_StrokeCollected(object sender, InkCanvasStrokeCollectedEventArgs e)
@@ -152,29 +175,46 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
         private void JournalPage_Loaded(object sender, RoutedEventArgs e)
         {
             isPageLoaded = true;
-
-            //AdaptToSide(this.PageSide);
         }
 
-        private void InkCanvas_TouchDown(object sender, TouchEventArgs e)
+        private void InkCanvas_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            e.Handled = true;
+            if (e.StylusDevice == null) return;
+            if (e.StylusDevice.TabletDevice.Type == TabletDeviceType.Touch)
+            {
+                this.pageNumberAndOptionsGrid.Visibility = Visibility.Visible;
+
+                e.Handled = true;
+            }
         }
 
-        private void InkCanvas_PreviewTouchDown(object sender, TouchEventArgs e)
+        private void InkCanvas_PreviewMouseMove(object sender, MouseEventArgs e)
         {
-            e.Handled = true;
+            if (e.StylusDevice == null) return;
+            if (e.StylusDevice.TabletDevice.Type == TabletDeviceType.Touch)
+            {
+                e.Handled = true;
+            }
         }
 
-        private void InkCanvas_PreviewTouchMove(object sender, TouchEventArgs e)
+        private void InkCanvas_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
-            e.Handled = true;
+            if (e.StylusDevice == null) return;
+            if (e.StylusDevice.TabletDevice.Type == TabletDeviceType.Touch)
+            {
+               
+
+                e.Handled = true;
+            }
         }
 
         private void InkCanvas_PreviewStylusDown(object sender, StylusDownEventArgs e)
         {
             if (e.StylusDevice.TabletDevice.Type == TabletDeviceType.Touch)
                 e.Handled = true;
+
+            // hiding then
+            this.pageNumberAndOptionsGrid.Visibility = Visibility.Hidden;
         }
 
         private void InkCanvas_PreviewStylusMove(object sender, StylusEventArgs e)
@@ -185,6 +225,8 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
 
         private void JournalPage_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
+            this.pageNumberAndOptionsGrid.Visibility = Visibility.Collapsed;
+
             // clearing Ink Layer
             this.inkCanvas.Strokes.Clear();
 
@@ -219,8 +261,16 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
             if (this.Context.IsOdd) this.PageSide = Constants.Side.Right;
             else this.PageSide = Constants.Side.Left;
 
+            // 
+            this.pageNumberAndOptionsGrid.Visibility = Visibility.Hidden;
+
             // using page's Id as it's number
             this.PageNumber = this.Context.Id;
+        }
+
+        private void InkCanvas_PreviewStylusInRange(object sender, StylusEventArgs e)
+        {
+            this.pageNumberAndOptionsGrid.Visibility = Visibility.Hidden;
         }
     } // class
 } // namespace

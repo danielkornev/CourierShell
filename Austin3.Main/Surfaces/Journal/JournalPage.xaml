@@ -20,13 +20,12 @@
 
             <Canvas x:Name="shapesCanvas" Background="Transparent"/>
 
-            <!-- Strokes="{Binding InkLayer}"-->
             <InkCanvas x:Name="inkCanvas" 
-                   
-                   Stylus.IsTouchFeedbackEnabled="False"
-                   Stylus.IsPressAndHoldEnabled="False" Background="Transparent" PreviewStylusDown="InkCanvas_PreviewStylusDown" PreviewStylusMove="InkCanvas_PreviewStylusMove" PreviewTouchDown="InkCanvas_PreviewTouchDown" PreviewTouchMove="InkCanvas_PreviewTouchMove" />
+                   PreviewStylusInRange="InkCanvas_PreviewStylusInRange"
+                   Stylus.IsTouchFeedbackEnabled="False" PreviewMouseDown="InkCanvas_PreviewMouseDown" PreviewMouseUp="InkCanvas_PreviewMouseUp" PreviewMouseMove="InkCanvas_PreviewMouseMove"
+                   Stylus.IsPressAndHoldEnabled="False" Background="Transparent" PreviewStylusDown="InkCanvas_PreviewStylusDown" PreviewStylusMove="InkCanvas_PreviewStylusMove" />
 
-            <Grid Visibility="Visible" Background="#FF000000" x:Name="pageNumberAndOptionsGrid" Margin="0,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+            <Grid Visibility="Collapsed" Background="#FF000000" x:Name="pageNumberAndOptionsGrid" Margin="0,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
               Width="100" Height="50">
                 <TextBlock Text="{Binding ElementName=journalPage, Path=PageNumber}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="White"></TextBlock>
             </Grid>
