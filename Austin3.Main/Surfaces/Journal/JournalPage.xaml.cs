@@ -208,11 +208,19 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
 
             if (Context.IsCoverPage) return;
 
-            if (Context.InkLayer == null) return;
+            if (Context.InkLayer != null)
+            {
+                // obtaining ink layer from the entity
+                this.inkCanvas.Strokes = Context.InkLayer;
+            }
 
-            // obtaining ink layer from the entity
-            this.inkCanvas.Strokes = Context.InkLayer;
 
+            // Page Side
+            if (this.Context.IsOdd) this.PageSide = Constants.Side.Right;
+            else this.PageSide = Constants.Side.Left;
+
+            // using page's Id as it's number
+            this.PageNumber = this.Context.Id;
         }
     } // class
 } // namespace
