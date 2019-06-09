@@ -23,9 +23,9 @@
             <InkCanvas x:Name="inkCanvas" 
                    PreviewStylusInRange="InkCanvas_PreviewStylusInRange"
                    Stylus.IsTouchFeedbackEnabled="False" PreviewMouseDown="InkCanvas_PreviewMouseDown" PreviewMouseUp="InkCanvas_PreviewMouseUp" PreviewMouseMove="InkCanvas_PreviewMouseMove"
-                   Stylus.IsPressAndHoldEnabled="False" Background="Transparent" PreviewStylusDown="InkCanvas_PreviewStylusDown" PreviewStylusMove="InkCanvas_PreviewStylusMove" />
+                   Stylus.IsPressAndHoldEnabled="False" Background="Transparent" PreviewStylusDown="InkCanvas_PreviewStylusDown" PreviewStylusMove="InkCanvas_PreviewStylusMove" PreviewStylusUp="InkCanvas_PreviewStylusUp" />
 
-            <Grid Visibility="Collapsed" Background="#FF000000" x:Name="pageNumberAndOptionsGrid" Margin="0,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+            <Grid Visibility="Collapsed" Background="#FF000000" x:Name="pageNumberAndOptionsGrid" Margin="0,90,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
               Width="100" Height="50">
                 <TextBlock Text="{Binding ElementName=journalPage, Path=PageNumber}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="White"></TextBlock>
             </Grid>

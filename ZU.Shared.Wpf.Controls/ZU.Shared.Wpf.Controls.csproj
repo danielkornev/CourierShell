@@ -62,6 +62,7 @@
       <DependentUpon>BookPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ContentControl3D.cs" />
+    <Compile Include="Controls\DependencyObjectParentHelper.cs" />
     <Compile Include="Controls\Internal\ContentValueConverter.cs" />
     <Compile Include="Controls\RotationDestination.cs" />
     <Compile Include="Controls\RotationDirection.cs" />

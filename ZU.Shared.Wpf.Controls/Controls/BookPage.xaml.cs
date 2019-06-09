@@ -115,6 +115,41 @@ namespace ZU.Shared.Wpf.Controls
             pageShadow.EndPoint = parameters.Page0ShadowEndPoint;
         }
 
+        
+
+        private void ContentControl_TouchMove(object sender, TouchEventArgs e)
+        {
+            if ((Status == PageStatus.DropAnimation) || (Status == PageStatus.TurnAnimation) || (Status == PageStatus.Inking))
+                return;
+
+            //Application.Current.MainWindow.Title += "M";
+
+            UIElement source = sender as UIElement;
+            Point p = e.GetTouchPoint(source).Position;
+
+            if (!(sender as UIElement).AreAnyTouchesCaptured)
+            {
+                CornerOrigin? tmp = GetCorner(source, p);
+
+                if (tmp.HasValue)
+                    origin = tmp.Value;
+                else
+                {
+                    if (Status == PageStatus.DraggingWithoutCapture)
+                    {
+                        DropPage(ComputeAnimationDuration(source, p, origin));
+                    }
+                    return;
+                }
+                Status = PageStatus.DraggingWithoutCapture;
+            }
+
+            PageParameters? parameters = ComputePage(source, p, origin);
+            _cornerPoint = p;
+            if (parameters != null)
+                ApplyParameters(parameters.Value);
+        }
+
         private void OnMouseMove(object sender, MouseEventArgs args)
         {
             if ((args.StylusDevice != null))
@@ -199,6 +234,28 @@ namespace ZU.Shared.Wpf.Controls
             return result;
         }
 
+        private void ContentControl_TouchDown(object sender, TouchEventArgs e)
+        {
+            if ((Status == PageStatus.DropAnimation) || (Status == PageStatus.TurnAnimation) || (Status == PageStatus.Inking))
+                return;
+
+            UIElement source = sender as UIElement;
+            Point p = e.GetTouchPoint(source).Position;
+
+            CornerOrigin? tmp = GetCorner(source, p);
+
+            if (tmp.HasValue)
+            {
+                origin = tmp.Value;
+                this.CaptureTouch(e.TouchDevice);
+            }
+            else
+                return;
+
+            Status = PageStatus.Dragging;
+        }
+
+
         private void OnMouseDown(object sender, MouseButtonEventArgs args)
         {
             if ((args.StylusDevice!=null))
@@ -224,6 +281,26 @@ namespace ZU.Shared.Wpf.Controls
 
             Status = PageStatus.Dragging;
         }
+
+
+        private void ContentControl_TouchUp(object sender, TouchEventArgs e)
+        {
+            if (this.AreAnyTouchesCaptured)
+            {
+                Status = PageStatus.None;
+
+                UIElement source = sender as UIElement;
+                Point p = e.GetTouchPoint(source).Position;
+
+                if (IsOnNextPage(e.GetTouchPoint(this).Position, this, origin))
+                    TurnPage(animationDuration);
+                else
+                    DropPage(ComputeAnimationDuration(source, p, origin));
+
+                this.ReleaseTouchCapture(e.TouchDevice);
+            }
+        }
+
         private void OnMouseUp(object sender, MouseButtonEventArgs args)
         {
             if ((args.StylusDevice != null))
@@ -247,6 +324,15 @@ namespace ZU.Shared.Wpf.Controls
             }
         }
 
+
+        private void ContentControl_TouchLeave(object sender, TouchEventArgs e)
+        {
+            if (Status == PageStatus.DraggingWithoutCapture)
+            {
+                DropPage(animationDuration);
+            }
+        }
+
         private void OnMouseLeave(object sender, MouseEventArgs args) 
         {
             if ((args.StylusDevice != null))
@@ -256,10 +342,10 @@ namespace ZU.Shared.Wpf.Controls
 
             if (Status == PageStatus.DraggingWithoutCapture)
             {
-                //DropPage(ComputeAnimationDuration(source, p));
                 DropPage(animationDuration);
             }
         }
+
         private Point OriginToPoint(UIElement source, CornerOrigin origin) 
         {
             switch (origin)
@@ -431,6 +517,8 @@ namespace ZU.Shared.Wpf.Controls
             IsBottomLeftCornerEnabledProperty= DependencyProperty.Register("IsBottomLeftCornerEnabled", typeof(bool), typeof(BookPage), new PropertyMetadata(true));
             IsBottomRightCornerEnabledProperty= DependencyProperty.Register("IsBottomRightCornerEnabled", typeof(bool), typeof(BookPage), new PropertyMetadata(true));
         }
+
+        
     }
 
     public delegate T Read<T>();

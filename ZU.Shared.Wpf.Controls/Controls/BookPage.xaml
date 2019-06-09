@@ -4,7 +4,12 @@
     Loaded="OnLoaded" BorderBrush="Red" BorderThickness="1"
     MouseDoubleClick="OnMouseDoubleClick"
     MouseMove="OnMouseMove" MouseDown="OnMouseDown"
-		MouseUp="OnMouseUp" MouseLeave="OnMouseLeave" >
+		MouseUp="OnMouseUp" MouseLeave="OnMouseLeave" 
+    
+    >
+    <!-- PreviewTouchDown="ContentControl_TouchDown"
+    PreviewTouchMove="ContentControl_TouchMove"
+    PreviewTouchUp="ContentControl_TouchUp"-->
   <Grid x:Name="mainGrid">
 		<!--Page 2 begin-->
 			<ContentPresenter x:Name="page2" />

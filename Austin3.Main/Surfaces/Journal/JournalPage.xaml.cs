@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ZU.Apps.Austin3.Storage;
+using ZU.Shared.Wpf.Controls;
+using ZU.Shared.Wpf.Controls.Controls;
 using ZU.Shared.Wpf.Ink;
 
 namespace ZU.Apps.Austin3.Surfaces.Journal
@@ -184,6 +186,16 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
             {
                 this.pageNumberAndOptionsGrid.Visibility = Visibility.Visible;
 
+
+                var bookPage = this.FindParent<BookPage>();
+                if (bookPage!=null)
+                {
+                    bookPage.RaiseEvent(new MouseButtonEventArgs(Mouse.PrimaryDevice, e.Timestamp, e.ChangedButton, e.StylusDevice)
+                    {
+                        RoutedEvent = Mouse.MouseDownEvent
+                    });
+                }
+
                 e.Handled = true;
             }
         }
@@ -193,6 +205,15 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
             if (e.StylusDevice == null) return;
             if (e.StylusDevice.TabletDevice.Type == TabletDeviceType.Touch)
             {
+                var bookPage = this.FindParent<BookPage>();
+                if (bookPage != null)
+                {
+                    bookPage.RaiseEvent(new MouseEventArgs(Mouse.PrimaryDevice, e.Timestamp, e.StylusDevice)
+                    {
+                        RoutedEvent = Mouse.MouseMoveEvent
+                    });
+                }
+
                 e.Handled = true;
             }
         }
@@ -202,11 +223,26 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
             if (e.StylusDevice == null) return;
             if (e.StylusDevice.TabletDevice.Type == TabletDeviceType.Touch)
             {
-               
+                var bookPage = this.FindParent<BookPage>();
+                if (bookPage != null)
+                {
+                    bookPage.RaiseEvent(new MouseButtonEventArgs(Mouse.PrimaryDevice, e.Timestamp, MouseButton.Left, e.StylusDevice)
+                    {
+                        RoutedEvent = Mouse.MouseUpEvent
+                    });
+                }
 
                 e.Handled = true;
             }
         }
+
+        //private Book GetBookControl()
+        //{
+        //    // obtaining Journals Window
+        //    var mainWindow = Application.Current.MainWindow as JournalsWindow;
+
+        //    return mainWindow.currentJournalBook;
+        //}
 
         private void InkCanvas_PreviewStylusDown(object sender, StylusDownEventArgs e)
         {
@@ -221,6 +257,16 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
         {
             if (e.StylusDevice.TabletDevice.Type == TabletDeviceType.Touch)
                 e.Handled = true;
+        }
+
+        private void InkCanvas_PreviewStylusInRange(object sender, StylusEventArgs e)
+        {
+            this.pageNumberAndOptionsGrid.Visibility = Visibility.Hidden;
+        }
+
+        private void InkCanvas_PreviewStylusUp(object sender, StylusEventArgs e)
+        {
+
         }
 
         private void JournalPage_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -268,9 +314,6 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
             this.PageNumber = this.Context.Id;
         }
 
-        private void InkCanvas_PreviewStylusInRange(object sender, StylusEventArgs e)
-        {
-            this.pageNumberAndOptionsGrid.Visibility = Visibility.Hidden;
-        }
+        
     } // class
 } // namespace
