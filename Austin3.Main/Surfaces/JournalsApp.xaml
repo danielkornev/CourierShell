@@ -70,21 +70,21 @@
                             <Trigger Property="IsMouseOver" Value="false">
                                 <Setter TargetName="buttonLayoutRoot" Property="Effect">
                                     <Setter.Value>
-                                        <DropShadowEffect Color="Orange" BlurRadius="10" ShadowDepth="0" Direction="0"/>
+                                        <DropShadowEffect Color="#FF10727B" BlurRadius="10" ShadowDepth="0" Direction="0"/>
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
                                 <Setter TargetName="buttonLayoutRoot" Property="Effect">
                                     <Setter.Value>
-                                        <DropShadowEffect Color="Orange" BlurRadius="50" ShadowDepth="0" Direction="0"/>
+                                        <DropShadowEffect Color="#FF10727B" BlurRadius="50" ShadowDepth="0" Direction="0"/>
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
                                 <Setter TargetName="buttonLayoutRoot" Property="Effect">
                                     <Setter.Value>
-                                        <DropShadowEffect Color="Orange" BlurRadius="50" ShadowDepth="0" Direction="0"/>
+                                        <DropShadowEffect Color="#FF10727B" BlurRadius="50" ShadowDepth="0" Direction="0"/>
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
