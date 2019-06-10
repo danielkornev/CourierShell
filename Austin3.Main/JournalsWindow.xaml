@@ -790,7 +790,7 @@
 
             </Grid>
 
-            <Grid Grid.ColumnSpan="3" Width="50" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+            <Grid Grid.ColumnSpan="3" Width="50" HorizontalAlignment="Center" VerticalAlignment="Top" 
               Margin="0,-1,0,-1"  x:Name="controlsAreaGrid" Background="Transparent">
                 <Grid.Effect>
                     <DropShadowEffect Color="Black" BlurRadius="50" ShadowDepth="0" Direction="0"/>
