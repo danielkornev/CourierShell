@@ -84,7 +84,15 @@ namespace ZU.Apps.Austin3
                     else if (scale < scaleTransform.ScaleX)
                     {
                         if (scaleTransform.ScaleX == 1)
+                        {
                             this.BeginStoryboard((Storyboard)this.Resources["zoomToNotebookToolsStoryboard"]);
+
+                            // getting current journal
+                            var journalEntity = GetCurrentJournal();
+
+                            // update current journal's metadata
+                            UpdateCurrentJournalMetadata(journalEntity); // will be useful
+                        }
                     }
                 }
             }

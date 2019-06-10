@@ -281,9 +281,21 @@
               RenderTransformOrigin="0.5,0.5"
               >
             <Grid.RenderTransform>
-                <ScaleTransform ScaleX="1" ScaleY="1"/>
+                <ScaleTransform ScaleX="0.7" ScaleY="0.7"/>
             </Grid.RenderTransform>
 
+            <Grid VerticalAlignment="Top" HorizontalAlignment="Left" x:Name="currentJournalMetadataGrid" Height="130" Width="540" Margin="-80,0,0,0">
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF353535" Offset="0"/>
+                        <GradientStop Color="#FF323232" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+
+                <TextBlock x:Name="currentJournalDisplayNameTextBlock" Text="JOURNAL" Foreground="White" FontSize="48" Margin="10,0,0,48" FontFamily="Segoe Print" />
+                <TextBlock x:Name="currentJournalPagesInfoTextBlock" Text="3 pages" Foreground="White" FontSize="20" Margin="10, 65, 0, 0"/>
+            </Grid>
+            
             <Button x:Name="addNewJournalButton" Width="70" Height="Auto" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-80,20,20,20" Style="{DynamicResource AddNewJournalButtonStyle}" 
                     Click="AddNewJournalButton_Click">
             </Button>

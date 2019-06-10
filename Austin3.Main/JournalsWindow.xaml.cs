@@ -322,11 +322,17 @@ namespace ZU.Apps.Austin3
 
         private void SaveCurrentJournal()
         {
-            var pages = this.currentJournalBook.ItemsSource as JournalPagesObservableCollection<JournalPageEntity>;
-            var journal = pages.Journal;
+            JournalEntity journal = GetCurrentJournal();
             journal.DateUpdated = DateTime.UtcNow;
             journal.LastOpenPage = this.currentJournalBook.CurrentSheetIndex;
             this.storageContext.SaveJournal(journal);
+        }
+
+        private JournalEntity GetCurrentJournal()
+        {
+            var pages = this.currentJournalBook.ItemsSource as JournalPagesObservableCollection<JournalPageEntity>;
+            var journal = pages.Journal;
+            return journal;
         }
 
         private void LoadJournal(JournalEntity journalEntity)
@@ -334,6 +340,15 @@ namespace ZU.Apps.Austin3
             // binding
             this.currentJournalBook.ItemsSource = journalEntity.Pages;
             this.currentJournalBook.CurrentSheetIndex = journalEntity.LastOpenPage;
+
+            // update current journal's metadata
+            UpdateCurrentJournalMetadata(journalEntity);
+        }
+
+        private void UpdateCurrentJournalMetadata(JournalEntity journalEntity)
+        {
+            this.currentJournalDisplayNameTextBlock.Text = journalEntity.DisplayName;
+            this.currentJournalPagesInfoTextBlock.Text = journalEntity.Pages.Count + " pages";
         }
 
         private void JournalsWindow_Closed(object sender, EventArgs e)
