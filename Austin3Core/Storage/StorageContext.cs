@@ -67,29 +67,38 @@ namespace ZU.Apps.Austin3.Storage
             if (this.Journals.Count(j => j.IsSoftedDeleted == false) > 0) return;
 
             // otherwise it means we don't have any journals that are alive in the system
+            CreateJournalInternal(id:Constants.KnownEntities.FirstJournal, displayName: "First Journal", hexColor:Constants.Colors.BeautifulGreen);
+        }
 
+        public JournalEntity CreateJournal(string displayName, string hexColor)
+        {
+            return this.CreateJournalInternal(Guid.NewGuid(), displayName, hexColor);
+        }
+
+        private JournalEntity CreateJournalInternal(Guid id, string displayName, string hexColor)
+        {
             #region Creating Journal
-            var firstJournal = new JournalEntity
+            var journal = new JournalEntity
             {
-                Id = Constants.KnownEntities.FirstJournal,
+                Id = id,
                 StorageContext = this,
                 IsSoftedDeleted = false,
                 DateCreated = DateTime.UtcNow,
                 DateUpdated = DateTime.UtcNow,
-                FrontCoverSolidBrushHex = Constants.Colors.Violet,
-                FrontCoverSolidColorHex = Constants.Colors.Violet,
-                DisplayName = "First Journal",
+                FrontCoverSolidBrushHex = hexColor,
+                FrontCoverSolidColorHex = hexColor,
+                DisplayName = displayName,
                 Width = 205,
                 X = 350,
                 Y = 490,
                 ZoomLevel = 1
             };
 
-            this.Journals.AddJournal(firstJournal);
+            this.Journals.AddJournal(journal);
             #endregion
 
             // loading pages
-            var pages = firstJournal.Pages;
+            var pages = journal.Pages;
 
             #region Creating Front Cover & First Two Pages
             JournalPageEntity cover = new JournalPageEntity
@@ -100,7 +109,7 @@ namespace ZU.Apps.Austin3.Storage
                 IsCoverPage = true
             };
 
-            firstJournal.Pages.AddPage(cover);
+            journal.Pages.AddPage(cover);
 
             JournalPageEntity page1 = new JournalPageEntity
             {
@@ -110,7 +119,7 @@ namespace ZU.Apps.Austin3.Storage
                 IsCoverPage = false
             };
 
-            firstJournal.Pages.AddPage(page1);
+            journal.Pages.AddPage(page1);
 
             JournalPageEntity page2 = new JournalPageEntity
             {
@@ -120,17 +129,10 @@ namespace ZU.Apps.Austin3.Storage
                 IsCoverPage = false
             };
 
-            firstJournal.Pages.AddPage(page2);
-
-            // temp
-            firstJournal.Pages.CollectionChanged += Pages_CollectionChanged;
-
+            journal.Pages.AddPage(page2);
             #endregion
-        }
 
-        private void Pages_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            
+            return journal;
         }
 
         private LiteDatabase GetInternalStorageContext()

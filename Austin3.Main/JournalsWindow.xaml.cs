@@ -9,9 +9,11 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZU.Apps.Austin3.Collections;
 using ZU.Apps.Austin3.Storage;
 using ZU.Apps.Austin3.Surfaces;
 using ZU.Apps.Austin3.Surfaces.Camera;
@@ -96,6 +98,8 @@ namespace ZU.Apps.Austin3
 
             this.Loaded += JournalsWindow_Loaded;
 
+            this.Closed += JournalsWindow_Closed;
+
             this.storageContext = new StorageContext();
 
             // this should always return the last journal
@@ -107,9 +111,27 @@ namespace ZU.Apps.Austin3
             // loading pages
             lastJournal.Pages.Load();
 
-            // binding
-            this.currentJournalBook.ItemsSource = lastJournal.Pages;
+            // updating
+            if (lastJournal.Id == Constants.KnownEntities.FirstJournal)
+            {
+                lastJournal.FrontCoverSolidBrushHex = Constants.Colors.BeautifulGreen;
+                lastJournal.FrontCoverSolidColorHex = Constants.Colors.BeautifulGreen;
+
+                // saving changes
+                storageContext.SaveJournal(lastJournal);
+            }
+
+            // loading journal
+            LoadJournal(lastJournal);
+
+            // 
+            this.latestJournalsListBox.ItemsSource = this.storageContext.Journals;
+
+            // TouchFrame
+            Touch.FrameReported += new TouchFrameEventHandler(Touch_FrameReported);
         }
+
+        
 
         private void JournalsWindow_Loaded(object sender, RoutedEventArgs e)
         {
@@ -265,6 +287,59 @@ namespace ZU.Apps.Austin3
             leftAppContentPresenter.Visibility = Visibility.Visible;
 
             leftAppContentPresenter.Content = this.GalleryAppLeftInstance;
+        }
+
+        private void LatestJournalsListBox_ManipulationBoundaryFeedback(object sender, ManipulationBoundaryFeedbackEventArgs e)
+        {
+            // cancelling that inertia thing
+            e.Handled = true;
+        }
+
+        private void AddNewJournalButton_Click(object sender, RoutedEventArgs e)
+        {
+            // dirty hack for now
+            this.storageContext.CreateJournal("New Journal", Constants.Colors.MidGray);
+            // should be fine, for now, again
+        }
+
+        private void JournalDataItemGrid_PreviewTouchDown(object sender, TouchEventArgs e)
+        {
+            var journalEntity = (sender as Grid).DataContext as JournalEntity;
+            if (journalEntity == null) return;
+
+            // otherwise, we shall load and open it
+            journalEntity.Pages.Load();
+
+            // doing things
+            SaveCurrentJournal();
+
+            LoadJournal(journalEntity);
+
+
+            // animation
+            this.BeginStoryboard((Storyboard)this.Resources["zoomToNotebookStoryboard"]);
+        }
+
+        private void SaveCurrentJournal()
+        {
+            var pages = this.currentJournalBook.ItemsSource as JournalPagesObservableCollection<JournalPageEntity>;
+            var journal = pages.Journal;
+            journal.DateUpdated = DateTime.UtcNow;
+            journal.LastOpenPage = this.currentJournalBook.CurrentSheetIndex;
+            this.storageContext.SaveJournal(journal);
+        }
+
+        private void LoadJournal(JournalEntity journalEntity)
+        {
+            // binding
+            this.currentJournalBook.ItemsSource = journalEntity.Pages;
+            this.currentJournalBook.CurrentSheetIndex = journalEntity.LastOpenPage;
+        }
+
+        private void JournalsWindow_Closed(object sender, EventArgs e)
+        {
+            // safely saving currently' opened journal
+            SaveCurrentJournal();
         }
     } // class
 } // namespace

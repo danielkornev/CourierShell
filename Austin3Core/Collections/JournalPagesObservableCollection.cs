@@ -43,6 +43,9 @@ namespace ZU.Apps.Austin3.Collections
 
             // loading
             this.AddRange(allPages);
+
+            // setting it as loaded
+            this.Journal.IsLoaded = true;
         }
 
         public void AddPage(T page)

@@ -294,7 +294,14 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
 
             this.Context = entity;
 
-            if (Context.IsCoverPage) return;
+            if (Context.IsCoverPage)
+            {
+                // color
+                this.frontCoverGrid.Background = Context.Journal.FrontCoverBrush;
+
+                // name
+                this.journalDisplayNameTextBlock.Text = Context.Journal.DisplayName;
+            }
 
             if (Context.InkLayer != null)
             {

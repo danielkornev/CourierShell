@@ -131,6 +131,13 @@ namespace ZU.Apps.Austin3.Storage
 
         #endregion
 
+        #region Constructor
+        public JournalEntity()
+        {
+            
+        }
+        #endregion
+
         #region Collections
         /// <summary>
         /// List of all contained Journal Pages. Should be lazy loadable.
@@ -147,6 +154,8 @@ namespace ZU.Apps.Austin3.Storage
                 return this._pages;
             }
         }
+
+        public int LastOpenPage { get; set; }
         #endregion
 
         #region Methods

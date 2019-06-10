@@ -33,13 +33,13 @@
         </Grid>
 
         <Grid x:Name="frontCoverGrid" Visibility="{Binding Path=IsCoverPage, Converter={StaticResource BoolToVis}, ConverterParameter=Normal}">
-            <Grid.Background>
+            <!--<Grid.Background>
                 <ImageBrush ImageSource="/Austin3.Main;component/Resources/stl_classic_cover_bg_05.scale-100.jpg"/>
-            </Grid.Background>
+            </Grid.Background>-->
             <Grid >
 
 
-                <TextBlock Text="{Binding Journal.DisplayName}" Foreground="White" FontSize="40" FontFamily="Segoe UI Light" Margin="50,0,50,0" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                <TextBlock x:Name="journalDisplayNameTextBlock" Text="{Binding Journal.DisplayName}" Foreground="White" FontSize="40" FontFamily="Segoe UI Light" Margin="50,0,50,0" HorizontalAlignment="Left" VerticalAlignment="Center" 
                                TextWrapping="Wrap" TextTrimming="WordEllipsis" MaxWidth="320" />
             </Grid>
 
