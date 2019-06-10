@@ -292,7 +292,8 @@
                     </LinearGradientBrush>
                 </Grid.Background>
 
-                <TextBlock x:Name="currentJournalDisplayNameTextBlock" Text="JOURNAL" Foreground="White" FontSize="48" Margin="10,0,0,48" FontFamily="Segoe Print" />
+                <TextBox Background="Transparent" BorderThickness="0" TextChanged="CurrentJournalDisplayNameTextBox_TextChanged" x:Name="currentJournalDisplayNameTextBox" Text="JOURNAL" Foreground="White" FontSize="48" Margin="10,0,0,48" FontFamily="Segoe Print" />
+                
                 <TextBlock x:Name="currentJournalPagesInfoTextBlock" Text="3 pages" Foreground="White" FontSize="20" Margin="10, 65, 0, 0"/>
             </Grid>
             

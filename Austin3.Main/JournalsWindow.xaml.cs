@@ -90,6 +90,8 @@ namespace ZU.Apps.Austin3
                 return this.galleryAppLeftInstance;
             }
         }
+
+        public bool IsAppLoaded { get; }
         #endregion
 
         public JournalsWindow()
@@ -129,6 +131,8 @@ namespace ZU.Apps.Austin3
 
             // TouchFrame
             Touch.FrameReported += new TouchFrameEventHandler(Touch_FrameReported);
+
+            this.IsAppLoaded = true;
         }
 
         
@@ -330,6 +334,8 @@ namespace ZU.Apps.Austin3
 
         private JournalEntity GetCurrentJournal()
         {
+            if (this.currentJournalBook == null) throw new Exception("UI didn't load yet");
+
             var pages = this.currentJournalBook.ItemsSource as JournalPagesObservableCollection<JournalPageEntity>;
             var journal = pages.Journal;
             return journal;
@@ -347,7 +353,7 @@ namespace ZU.Apps.Austin3
 
         private void UpdateCurrentJournalMetadata(JournalEntity journalEntity)
         {
-            this.currentJournalDisplayNameTextBlock.Text = journalEntity.DisplayName;
+            this.currentJournalDisplayNameTextBox.Text = journalEntity.DisplayName;
             this.currentJournalPagesInfoTextBlock.Text = journalEntity.Pages.Count + " pages";
         }
 
@@ -355,6 +361,20 @@ namespace ZU.Apps.Austin3
         {
             // safely saving currently' opened journal
             SaveCurrentJournal();
+        }
+
+        private void CurrentJournalDisplayNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (this.IsAppLoaded == false) return;
+
+            if (this.currentJournalDisplayNameTextBox.Text.Length>0)
+            {
+                var currentJournal = GetCurrentJournal();
+                currentJournal.DisplayName = this.currentJournalDisplayNameTextBox.Text;
+
+                // saving
+                SaveCurrentJournal();
+            }
         }
     } // class
 } // namespace

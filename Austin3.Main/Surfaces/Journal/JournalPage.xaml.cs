@@ -177,6 +177,13 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
         private void JournalPage_Loaded(object sender, RoutedEventArgs e)
         {
             isPageLoaded = true;
+
+            // Page Side
+            if (this.Context == null) return;
+
+            if (this.Context.IsOdd) this.PageSide = Constants.Side.Right;
+            else this.PageSide = Constants.Side.Left;
+
         }
 
         private void InkCanvas_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -313,6 +320,8 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
             // Page Side
             if (this.Context.IsOdd) this.PageSide = Constants.Side.Right;
             else this.PageSide = Constants.Side.Left;
+
+            AdaptToSide(this.PageSide);
 
             // 
             this.pageNumberAndOptionsGrid.Visibility = Visibility.Hidden;
