@@ -147,12 +147,12 @@
             </Setter>
         </Style>
 
-        <Storyboard x:Key="zoomToNotebookToolsStoryboard">
+        <Storyboard x:Key="zoomToNotebookToolsStoryboard" Timeline.DesiredFrameRate="20">
             <DoubleAnimation Storyboard.TargetName="bigGrid" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" From="1.0" To="0.7" Duration="0:0:0.7" />
             <DoubleAnimation Storyboard.TargetName="bigGrid" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" From="1.0" To="0.7" Duration="0:0:0.7" />
         </Storyboard>
 
-        <Storyboard x:Key="zoomToNotebookStoryboard">
+        <Storyboard x:Key="zoomToNotebookStoryboard" Timeline.DesiredFrameRate="20">
             <DoubleAnimation Storyboard.TargetName="bigGrid" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" From="0.7" To="1" Duration="0:0:0.7" />
             <DoubleAnimation Storyboard.TargetName="bigGrid" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" From="0.7" To="1" Duration="0:0:0.7" />
         </Storyboard>
@@ -281,7 +281,7 @@
               RenderTransformOrigin="0.5,0.5"
               >
             <Grid.RenderTransform>
-                <ScaleTransform ScaleX="0.7" ScaleY="0.7"/>
+                <ScaleTransform ScaleX="1" ScaleY="1"/>
             </Grid.RenderTransform>
 
             <Grid VerticalAlignment="Top" HorizontalAlignment="Left" x:Name="currentJournalMetadataGrid" Height="130" Width="540" Margin="-80,0,0,0">
@@ -810,7 +810,7 @@
 
                 </Grid.Effect>
 
-                <Border CornerRadius="5,5,0,0" Background="#FF000000">
+                <Border CornerRadius="0,0,5,5" Background="#FF000000" Margin="-3,0,0,0">
                     <Button HorizontalAlignment="Center" VerticalAlignment="Top" Width="40" Height="40" Margin="0,5,0,5" x:Name="switchAppsButton" Click="SwitchAppsButton_Click" Style="{DynamicResource ControlAreaButtonsStyle}">
                         <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
                             <Grid>

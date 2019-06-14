@@ -248,5 +248,8 @@
   <ItemGroup>
     <Resource Include="Resources\Objects\Pictures-WF.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Objects\Rocket.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

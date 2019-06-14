@@ -145,8 +145,12 @@ namespace ZU.Apps.Austin3
             this.WindowStyle = WindowStyle.SingleBorderWindow;
             this.WindowState = WindowState.Maximized;
 
+            // changing default framerate from 60 to 20
+            Timeline.DesiredFrameRateProperty.OverrideMetadata(
+               typeof(Timeline),
+               new FrameworkPropertyMetadata { DefaultValue = 20 }
+               );
 
-           
         }
 
         

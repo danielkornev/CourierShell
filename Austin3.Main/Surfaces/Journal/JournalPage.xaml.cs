@@ -308,6 +308,9 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
 
                 // name
                 this.journalDisplayNameTextBlock.Text = Context.Journal.DisplayName;
+
+                // # of pages
+                this.journalPagesTextBlock.Text = Context.Journal.Pages.Count.ToString() + " pages";
             }
 
             if (Context.InkLayer != null)
@@ -329,7 +332,5 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
             // using page's Id as it's number
             this.PageNumber = this.Context.Id;
         }
-
-        
     } // class
 } // namespace

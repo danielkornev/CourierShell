@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:core="clr-namespace:ZU.Shared.Wpf;assembly=Austin3Core"
+             xmlns:objects="clr-namespace:Austin3.Main.Objects"
              x:Name="journalPage"
              mc:Ignorable="d" 
              MinHeight="728" MinWidth="560" DataContextChanged="JournalPage_DataContextChanged">
@@ -20,6 +21,21 @@
 
             <Canvas x:Name="shapesCanvas" Background="Transparent"/>
 
+            <ListBox x:Name="mediaObjectsCanvas" Background="Transparent" BorderThickness="0">
+                <ListBox.ItemTemplate>
+                    <ItemContainerTemplate>
+                        <objects:GalleryPhoto />
+                    </ItemContainerTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas IsItemsHost="True">
+                            
+                        </Canvas>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+
             <InkCanvas x:Name="inkCanvas" 
                    PreviewStylusInRange="InkCanvas_PreviewStylusInRange"
                    Stylus.IsTouchFeedbackEnabled="False" PreviewMouseDown="InkCanvas_PreviewMouseDown" PreviewMouseUp="InkCanvas_PreviewMouseUp" PreviewMouseMove="InkCanvas_PreviewMouseMove"
@@ -32,17 +48,41 @@
 
         </Grid>
 
+        <!--  -->
         <Grid x:Name="frontCoverGrid" Visibility="{Binding Path=IsCoverPage, Converter={StaticResource BoolToVis}, ConverterParameter=Normal}">
-            <!--<Grid.Background>
+            <Grid.Background>
                 <ImageBrush ImageSource="/Austin3.Main;component/Resources/stl_classic_cover_bg_05.scale-100.jpg"/>
-            </Grid.Background>-->
+            </Grid.Background>
             <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    
+                </Grid.RowDefinitions>
 
+               
 
-                <TextBlock x:Name="journalDisplayNameTextBlock" Text="{Binding Journal.DisplayName}" Foreground="White" FontSize="40" FontFamily="Segoe UI Light" Margin="50,0,50,0" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                <Grid Height="200" VerticalAlignment="Stretch" Background="White" Grid.Row="4" Grid.RowSpan="2">
+                    <TextBlock x:Name="journalDisplayNameTextBlock" Text="My Journal" Foreground="Black" FontSize="40" FontFamily="Segoe Print" 
+                               Margin="20,44,50,0" HorizontalAlignment="Left" VerticalAlignment="Top" 
                                TextWrapping="Wrap" TextTrimming="WordEllipsis" MaxWidth="320" />
-            </Grid>
 
+                    <TextBlock x:Name="journalPagesTextBlock" Text="2 pages" Foreground="Black" FontSize="18" FontFamily="Segoe UI Light"
+                               HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,120,20,0" />
+
+                    <Grid Height="1" VerticalAlignment="Stretch" Margin="20,30,20,0" Background="Black"/>
+                </Grid>
+
+                <Grid Grid.Row="0" Grid.RowSpan="7" Background="Black" Width="30" VerticalAlignment="Stretch" HorizontalAlignment="Right" 
+                      Margin="0,-2,50,-2">
+
+                </Grid>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>
