@@ -147,12 +147,13 @@
                 <Grid Height="500" 
                       Width="430"
                       Margin="0,0,0,0">
-                    <Grid Background="Black"                          x:Name="inkToolsGrid"                                                    Width="400" HorizontalAlignment="Left"                          >                                                                    </Grid>                    <Grid Background="Black" x:Name="inkToolbarGrid"
+                    <Grid Background="Black"                          x:Name="inkToolsGrid"                                                    Width="400" Height="500" HorizontalAlignment="Left"                          >                        <Grid.Effect>                            <DropShadowEffect Color="Black" BlurRadius="5" ShadowDepth="0"/>                        </Grid.Effect>                                                                    </Grid>                    <Grid Background="Black" x:Name="inkToolbarGrid"
                       HorizontalAlignment="Right"
                           VerticalAlignment="Top"
                           Margin="30,0,0,0" Width="30" 
                           TouchDown="InkToolbarGrid_TouchDown"
                           Height="80">
+                        <Grid.Effect>                            <DropShadowEffect Color="Black" BlurRadius="5" ShadowDepth="0"/>                        </Grid.Effect>
                         <Canvas x:Name="Layer_2" IsHitTestVisible="False" Margin="5,-85,0,0" Width="24" Height="0">
                             <Canvas.RenderTransform>
                                 <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>

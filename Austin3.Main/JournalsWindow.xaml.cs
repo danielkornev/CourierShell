@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -37,6 +38,39 @@ namespace ZU.Apps.Austin3
 
         bool areAppsShown = false;
         private StorageContext storageContext;
+        #endregion
+
+        #region Dependency Properties
+
+
+        public DrawingAttributes InkDrawingAttributes
+        {
+            get { return (DrawingAttributes)GetValue(InkDrawingAttributesProperty); }
+            set { SetValue(InkDrawingAttributesProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for InkDrawingAttributes.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty InkDrawingAttributesProperty =
+            DependencyProperty.Register("InkDrawingAttributes", typeof(DrawingAttributes), typeof(JournalsWindow), new PropertyMetadata(null, InkDrawingAttributesPropertyChanged));
+
+        private static void InkDrawingAttributesPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var wnd = d as JournalsWindow;
+            wnd?.OnInkDrawingAttributesChanged(wnd.InkDrawingAttributes);
+        }
+
+        private void OnInkDrawingAttributesChanged(DrawingAttributes inkDrawingAttributes)
+        {
+            // this should actually go back to the journal pages, but we'll see
+            if (this.InkDrawingAttributesChanged != null)
+                InkDrawingAttributesChanged(this, new DrawingAttributesChangedEventArgs(inkDrawingAttributes));
+        }
+
+
+        #endregion
+
+        #region Events
+        public event EventHandler<DrawingAttributesChangedEventArgs> InkDrawingAttributesChanged;
         #endregion
 
         #region Properties

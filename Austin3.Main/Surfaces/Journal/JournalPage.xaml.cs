@@ -79,7 +79,10 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
                     inkToolsBorder.CornerRadius = new CornerRadius(5, 0, 0, 5);
                     inkToolsBorder.FlowDirection = FlowDirection.RightToLeft;
                     inkToolsGrid.Width = 0;
-
+                    if (inkToolsGrid.Children.Count == 0)
+                    {
+                        inkToolsGrid.Children.Add(new InkToolbarControl());
+                    }
                     (inkToolsBorder.RenderTransform as TransformGroup).Children.OfType<TranslateTransform>().First().X = 400;
 
                     break;
@@ -89,7 +92,10 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
                     inkToolsBorder.CornerRadius = new CornerRadius(0, 5, 5, 0);
                     inkToolsBorder.FlowDirection = FlowDirection.LeftToRight;
                     inkToolsGrid.Width = 0;
-
+                    if (inkToolsGrid.Children.Count == 0)
+                    {
+                        inkToolsGrid.Children.Add(new InkToolbarControl());
+                    }
                     (inkToolsBorder.RenderTransform as TransformGroup).Children.OfType<TranslateTransform>().First().X = -400;
 
                     break;
@@ -131,7 +137,19 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
             this.inkCanvas.StrokeCollected += InkCanvas_StrokeCollected;
             this.inkCanvas.StrokeErased += InkCanvas_StrokeErased;
 
-            //this.inkCanvas.PreviewTouchUp += InkCanvas_PreviewTouchUp;
+            var parent = Application.Current.MainWindow as JournalsWindow;
+            if (parent == null) throw new Exception("Main Window is not a Journals Window!");
+
+            parent.InkDrawingAttributesChanged += Parent_InkDrawingAttributesChanged;
+        }
+
+        private void Parent_InkDrawingAttributesChanged(object sender, DrawingAttributesChangedEventArgs e)
+        {
+            if (e.DrawingAttributes!=null)
+            {
+                // updating our drawing attributes
+                this.inkCanvas.DefaultDrawingAttributes = e.DrawingAttributes;
+            }
         }
 
         private void InkCanvas_StrokeErased(object sender, RoutedEventArgs e)
@@ -347,7 +365,50 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
 
             AdaptToSide(this.PageSide);
 
-            // 
+            // preparing ink toolbar
+            var parent = Application.Current.MainWindow as JournalsWindow;
+            if (parent == null) throw new Exception("Main Window is not a Journals Window!");
+
+            if (parent.InkDrawingAttributes != null)
+            {
+                this.inkCanvas.DefaultDrawingAttributes = parent.InkDrawingAttributes;
+
+                if (this.inkToolsGrid.Children.Count==1)
+                {
+                    var inkToolbarControl = this.inkToolsGrid.Children.OfType<InkToolbarControl>().First();
+                    
+                    inkToolbarControl.SetSelectedColor(parent.InkDrawingAttributes.Color);
+                }
+            }
+
+            // hiding ink toolbar
+            switch (this.PageSide)
+            {
+                case Constants.Side.Left:
+                    if (this.isInkToolbarShown)
+                    {
+                        this.BeginStoryboard((Storyboard)this.Resources["collapseLeftInkToolBarStoryBoard"]);
+
+                        this.isInkToolbarShown = false;
+                    }
+
+                    break;
+                case Constants.Side.Right:
+                    if (this.isInkToolbarShown)
+                    {
+                        this.BeginStoryboard((Storyboard)this.Resources["collapseRightInkToolBarStoryBoard"]);
+
+                        this.isInkToolbarShown = false;
+                    }
+
+                    break;
+                case Constants.Side.Unknown:
+                    break;
+                default:
+                    break;
+            }
+
+            // Page Number & Options 
             this.pageNumberAndOptionsGrid.Visibility = Visibility.Hidden;
 
             // using page's Id as it's number

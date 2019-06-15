@@ -39,6 +39,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xaml" />
@@ -63,6 +64,9 @@
     </Compile>
     <Compile Include="Controls\ContentControl3D.cs" />
     <Compile Include="Controls\DependencyObjectParentHelper.cs" />
+    <Compile Include="Controls\InkToolbarControl.xaml.cs">
+      <DependentUpon>InkToolbarControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Internal\ContentValueConverter.cs" />
     <Compile Include="Controls\RotationDestination.cs" />
     <Compile Include="Controls\RotationDirection.cs" />
@@ -111,6 +115,10 @@
     <Page Include="Controls\BookPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\InkToolbarControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>

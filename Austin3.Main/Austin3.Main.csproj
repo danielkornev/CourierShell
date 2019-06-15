@@ -57,6 +57,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DrawingAttributesChangedEventArgs.cs" />
     <Compile Include="JournalsWindow.FullScreenBehavior.cs" />
     <Compile Include="JournalsWindow.Touch.cs" />
     <Compile Include="JournalsWindow.xaml.cs">
