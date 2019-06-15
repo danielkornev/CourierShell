@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -26,6 +27,8 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
     public partial class JournalPage : UserControl
     {
         bool isPageLoaded = false;
+
+        bool isInkToolbarShown = false;
 
         public JournalPageEntity Context
         {
@@ -72,10 +75,22 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
             {
                 case Constants.Side.Left:
                     pageNumberAndOptionsGrid.HorizontalAlignment = HorizontalAlignment.Left;
+                    inkToolsBorder.HorizontalAlignment = HorizontalAlignment.Right;
+                    inkToolsBorder.CornerRadius = new CornerRadius(5, 0, 0, 5);
+                    inkToolsBorder.FlowDirection = FlowDirection.RightToLeft;
+                    inkToolsGrid.Width = 0;
+
+                    (inkToolsBorder.RenderTransform as TransformGroup).Children.OfType<TranslateTransform>().First().X = 400;
 
                     break;
                 case Constants.Side.Right:
                     pageNumberAndOptionsGrid.HorizontalAlignment = HorizontalAlignment.Right;
+                    inkToolsBorder.HorizontalAlignment = HorizontalAlignment.Left;
+                    inkToolsBorder.CornerRadius = new CornerRadius(0, 5, 5, 0);
+                    inkToolsBorder.FlowDirection = FlowDirection.LeftToRight;
+                    inkToolsGrid.Width = 0;
+
+                    (inkToolsBorder.RenderTransform as TransformGroup).Children.OfType<TranslateTransform>().First().X = -400;
 
                     break;
                 case Constants.Side.Unknown:
@@ -311,6 +326,12 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
 
                 // # of pages
                 this.journalPagesTextBlock.Text = Context.Journal.Pages.Count.ToString() + " pages";
+
+                this.frontCoverGrid.Opacity = 1.0;
+            }
+            else
+            {
+                this.frontCoverGrid.Opacity = 0.0;
             }
 
             if (Context.InkLayer != null)
@@ -331,6 +352,51 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
 
             // using page's Id as it's number
             this.PageNumber = this.Context.Id;
+        }
+
+        private void InkToolbarGrid_TouchDown(object sender, TouchEventArgs e)
+        {
+            switch (this.PageSide)
+            {
+                case Constants.Side.Left:
+                    if (this.isInkToolbarShown == false)
+                    {
+                        // we begin animation
+                        this.BeginStoryboard((Storyboard)this.Resources["expandLeftInkToolBarStoryBoard"]);
+
+                        this.isInkToolbarShown = true;
+                    }
+                    else
+                    {
+                        this.BeginStoryboard((Storyboard)this.Resources["collapseLeftInkToolBarStoryBoard"]);
+
+                        this.isInkToolbarShown = false;
+                    }
+
+                    break;
+                case Constants.Side.Right:
+                    if (this.isInkToolbarShown == false)
+                    {
+                        // we begin animation
+                        this.BeginStoryboard((Storyboard)this.Resources["expandRightInkToolBarStoryBoard"]);
+
+                        this.isInkToolbarShown = true;
+                    }
+                    else
+                    {
+                        this.BeginStoryboard((Storyboard)this.Resources["collapseRightInkToolBarStoryBoard"]);
+
+                        this.isInkToolbarShown = false;
+                    }
+
+                    break;
+                case Constants.Side.Unknown:
+                    break;
+                default:
+                    break;
+            }
+
+
         }
     } // class
 } // namespace

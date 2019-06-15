@@ -10,6 +10,91 @@
              MinHeight="728" MinWidth="560" DataContextChanged="JournalPage_DataContextChanged">
     <UserControl.Resources>
         <core:InvertableBooleanToVisibilityConverter x:Key="BoolToVis"/>
+
+        <Storyboard x:Key="expandRightInkToolBarStoryBoard"
+						AccelerationRatio=".4"
+						DecelerationRatio=".4"
+                        Timeline.DesiredFrameRate="20"
+						>
+
+            <!--  To="0" From="-400"  -->
+            <DoubleAnimation Duration="0:00:0.5"
+						     From="-400"
+							 To="0"     
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)"	 
+                             Storyboard.TargetName="inkToolsBorder"
+							 />
+
+            <DoubleAnimation Duration="0:00:0.3"
+                             From="0" To="400"
+                             Storyboard.TargetProperty="Width"
+                             Storyboard.TargetName="inkToolsGrid"
+                             />
+        </Storyboard>
+
+        <Storyboard x:Key="collapseRightInkToolBarStoryBoard"
+						AccelerationRatio=".4"
+						DecelerationRatio=".4"
+                        Timeline.DesiredFrameRate="20"
+						>
+
+            <!--  To="-400" From="0"  -->
+            <DoubleAnimation Duration="0:00:0.5"
+						     From="0"
+							 To="-400"     
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)"	 
+                             Storyboard.TargetName="inkToolsBorder"
+							 />
+
+            <DoubleAnimation Duration="0:00:0.8"
+                             From="400" To="0"
+                             Storyboard.TargetProperty="Width"
+                             Storyboard.TargetName="inkToolsGrid"
+                             />
+        </Storyboard>
+
+        <Storyboard x:Key="expandLeftInkToolBarStoryBoard"
+						AccelerationRatio=".4"
+						DecelerationRatio=".4"
+                        Timeline.DesiredFrameRate="20"
+						>
+
+            <!--  To="0" From="-400"  -->
+            <DoubleAnimation Duration="0:00:0.5"
+						     From="400"
+							 To="0"     
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)"	 
+                             Storyboard.TargetName="inkToolsBorder"
+							 />
+
+            <DoubleAnimation Duration="0:00:0.3"
+                             From="0" To="400"
+                             Storyboard.TargetProperty="Width"
+                             Storyboard.TargetName="inkToolsGrid"
+                             />
+        </Storyboard>
+
+        <Storyboard x:Key="collapseLeftInkToolBarStoryBoard"
+						AccelerationRatio=".4"
+						DecelerationRatio=".4"
+                        Timeline.DesiredFrameRate="20"
+						>
+
+            <!--  To="-400" From="0"  -->
+            <DoubleAnimation Duration="0:00:0.5"
+						     From="0"
+							 To="400"     
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)"	 
+                             Storyboard.TargetName="inkToolsBorder"
+							 />
+
+            <DoubleAnimation Duration="0:00:0.8"
+                             From="400" To="0"
+                             Storyboard.TargetProperty="Width"
+                             Storyboard.TargetName="inkToolsGrid"
+                             />
+        </Storyboard>
+
     </UserControl.Resources>
     <Grid>
 
@@ -30,7 +115,7 @@
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Canvas IsItemsHost="True">
-                            
+
                         </Canvas>
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
@@ -46,10 +131,44 @@
                 <TextBlock Text="{Binding ElementName=journalPage, Path=PageNumber}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="White"></TextBlock>
             </Grid>
 
+            <Border  
+                CornerRadius="0,5,5,0"
+                Visibility="Visible" 
+                x:Name="inkToolsBorder" 
+                FlowDirection="LeftToRight"
+                Margin="0,110,0,0" Width="430" Height="500" 
+                HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform X="0" Y="0"/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+
+                <Grid Height="500" 
+                      Width="430"
+                      Margin="0,0,0,0">
+                    <Grid Background="Black"                          x:Name="inkToolsGrid"                                                    Width="400" HorizontalAlignment="Left"                          >                                                                    </Grid>                    <Grid Background="Black" x:Name="inkToolbarGrid"
+                      HorizontalAlignment="Right"
+                          VerticalAlignment="Top"
+                          Margin="30,0,0,0" Width="30" 
+                          TouchDown="InkToolbarGrid_TouchDown"
+                          Height="80">
+                        <Canvas x:Name="Layer_2" IsHitTestVisible="False" Margin="5,-85,0,0" Width="24" Height="0">
+                            <Canvas.RenderTransform>
+                                <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+                            </Canvas.RenderTransform>
+
+                            <Rectangle Width="10.3008" Height="8.35064" Canvas.Left="2.98364" Canvas.Top="12.5345" Stretch="Fill" StrokeLineJoin="Round" Stroke="#FF000000" Fill="#FFFFFFFF"/>
+                            <Rectangle Width="8.90069" Height="8.10062" Canvas.Left="3.73371" Canvas.Top="22.5854" Stretch="Fill" StrokeLineJoin="Round" Stroke="#FF000000" Fill="#FFFFFFFF"/>
+                            <Rectangle Width="6.10044" Height="9.2007" Canvas.Left="5.13383" Canvas.Top="32.6362" Stretch="Fill" StrokeLineJoin="Round" Stroke="#FF000000" Fill="#FFFFFFFF"/>
+                            <Ellipse Width="14.7345" Height="15.3346" Canvas.Left="0.88346" Canvas.Top="51.3378" Stretch="Fill" StrokeLineJoin="Round" Stroke="#FF000000" Fill="#FFFFFFFF"/>
+                        </Canvas>                    </Grid>                </Grid>
+            </Border>
+
         </Grid>
 
         <!--  -->
-        <Grid x:Name="frontCoverGrid" Visibility="{Binding Path=IsCoverPage, Converter={StaticResource BoolToVis}, ConverterParameter=Normal}">
+        <Grid x:Name="frontCoverGrid" Opacity="0" Visibility="{Binding Path=IsCoverPage, Converter={StaticResource BoolToVis}, ConverterParameter=Normal}">
             <Grid.Background>
                 <ImageBrush ImageSource="/Austin3.Main;component/Resources/stl_classic_cover_bg_05.scale-100.jpg"/>
             </Grid.Background>
@@ -62,15 +181,15 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
-                    
+
                 </Grid.RowDefinitions>
 
-               
+
 
                 <Grid Height="200" VerticalAlignment="Stretch" Background="White" Grid.Row="4" Grid.RowSpan="2">
                     <TextBlock x:Name="journalDisplayNameTextBlock" Text="My Journal" Foreground="Black" FontSize="40" FontFamily="Segoe Print" 
-                               Margin="20,44,50,0" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                               TextWrapping="Wrap" TextTrimming="WordEllipsis" MaxWidth="320" />
+                               Margin="20,44,20,0" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                               TextWrapping="Wrap" TextTrimming="WordEllipsis"  />
 
                     <TextBlock x:Name="journalPagesTextBlock" Text="2 pages" Foreground="Black" FontSize="18" FontFamily="Segoe UI Light"
                                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,120,20,0" />
