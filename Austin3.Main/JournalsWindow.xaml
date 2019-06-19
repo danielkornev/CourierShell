@@ -417,10 +417,9 @@
                         <controls:Book.ItemTemplate>
                             <DataTemplate>
                                 <!---->
-                            <Border BorderThickness="1" 
-                                BorderBrush="Gray" Background="Transparent">
+                            
                                 <journal:JournalPage DataContext="{Binding}"/>
-                            </Border>
+                            
                         </DataTemplate>
                     </controls:Book.ItemTemplate>
                 </controls:Book>

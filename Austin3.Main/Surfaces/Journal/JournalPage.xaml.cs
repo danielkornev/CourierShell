@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -78,6 +79,9 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
                     inkToolsBorder.HorizontalAlignment = HorizontalAlignment.Right;
                     inkToolsBorder.CornerRadius = new CornerRadius(5, 0, 0, 5);
                     inkToolsBorder.FlowDirection = FlowDirection.RightToLeft;
+                    bookCenterEffectGrid.FlowDirection = FlowDirection.RightToLeft;
+                    bookCenterEffectGrid.HorizontalAlignment = HorizontalAlignment.Right;
+                    pageBorder.BorderThickness = new Thickness(1, 1, 0, 1);
                     inkToolsGrid.Width = 0;
                     if (inkToolsGrid.Children.Count == 0)
                     {
@@ -91,6 +95,9 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
                     inkToolsBorder.HorizontalAlignment = HorizontalAlignment.Left;
                     inkToolsBorder.CornerRadius = new CornerRadius(0, 5, 5, 0);
                     inkToolsBorder.FlowDirection = FlowDirection.LeftToRight;
+                    bookCenterEffectGrid.FlowDirection = FlowDirection.LeftToRight;
+                    bookCenterEffectGrid.HorizontalAlignment = HorizontalAlignment.Left;
+                    pageBorder.BorderThickness = new Thickness(0, 1, 1, 1);
                     inkToolsGrid.Width = 0;
                     if (inkToolsGrid.Children.Count == 0)
                     {
@@ -137,10 +144,15 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
             this.inkCanvas.StrokeCollected += InkCanvas_StrokeCollected;
             this.inkCanvas.StrokeErased += InkCanvas_StrokeErased;
 
-            var parent = Application.Current.MainWindow as JournalsWindow;
-            if (parent == null) throw new Exception("Main Window is not a Journals Window!");
+            if (!DesignerProperties.GetIsInDesignMode(this))
+            {
+                var parent = Application.Current.MainWindow as JournalsWindow;
 
-            parent.InkDrawingAttributesChanged += Parent_InkDrawingAttributesChanged;
+
+                if (parent == null) throw new Exception("Main Window is not a Journals Window!");
+
+                parent.InkDrawingAttributesChanged += Parent_InkDrawingAttributesChanged;
+            }
         }
 
         private void Parent_InkDrawingAttributesChanged(object sender, DrawingAttributesChangedEventArgs e)
@@ -458,6 +470,20 @@ namespace ZU.Apps.Austin3.Surfaces.Journal
             }
 
 
+        }
+
+        private void InkCanvas_PreviewStylusOutOfRange(object sender, StylusEventArgs e)
+        {
+            // disabling hit test on ink canvas
+            this.inkCanvas.IsHitTestVisible = false;
+        }
+
+        private void NormalPageGrid_PreviewStylusInRange(object sender, StylusEventArgs e)
+        {
+            if (e.StylusDevice.TabletDevice.Type == TabletDeviceType.Stylus)
+            {
+                this.inkCanvas.IsHitTestVisible = true;
+            }
         }
     } // class
 } // namespace
